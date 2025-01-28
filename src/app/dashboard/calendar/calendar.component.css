@@ -1,0 +1,30 @@
+.calendar-container {
+    background-color: #000;
+    color: #fff;
+    border-radius: 12px;
+    padding: 40px;
+    width: 300px; /* Largeur fixe pour le bloc */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 510px;
+  }
+  
+  .calendar-container h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .calendar-content {
+    background-color: #111;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    color: #ccc;
+  }
+  
+  .calendar-content p {
+    margin: 0;
+  }
+  

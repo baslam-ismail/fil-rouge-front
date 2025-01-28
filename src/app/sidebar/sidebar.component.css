@@ -1,0 +1,114 @@
+.sidebar {
+    position: fixed; /* Fixe la sidebar à gauche */
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh; /* Prend toute la hauteur */
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Assure que le contenu est bien réparti */
+    padding: 20px;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.brand-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.version {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px; /* Réduit l'espace entre le logo et le menu */
+}
+
+.menu-item {
+    margin-bottom: 10px;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #00ff00;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px; /* Réduit la taille des liens */
+}
+
+.menu-item .icon {
+    margin-right: 10px;
+}
+
+.menu-item.active a {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.user-section {
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+
+.logout {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: rgba(255, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.logout:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+}

@@ -1,0 +1,25 @@
+.summary-container {
+    display: flex;
+    gap: 150px; /* Espacement entre les blocs */
+    margin-top: 20px;
+    justify-content: center; /* Centrage des blocs */
+  }
+  
+  .summary-item {
+    background-color: #000;
+    color: #fff;
+    border-radius: 12px;
+    padding: 40px;
+    width: 300px; /* Taille uniforme */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .summary-content {
+    background-color: #111;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
