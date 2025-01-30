@@ -6,14 +6,11 @@ import { AppComponent } from './app.component';
 bootstrapApplication(AppComponent);
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [],
   imports: [
     BrowserModule
   ],
   providers: [],
-  
 })
 
 export class AppModule { }
