@@ -6,10 +6,12 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { CustomerPortfolioComponent } from './customer-portfolio/customer-portfolio.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProfilComponent } from './profil/profil.component';
+import { CalendarComponent } from './dashboard/calendar/calendar.component';
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent},
+    { path: 'calendar', component: CalendarComponent},
     { path: 'create-account', component: CreateAccountComponent},
     { path: 'customer-portfolio', component: CustomerPortfolioComponent},
     { path: 'appointments', component: AppointmentsComponent},
