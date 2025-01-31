@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BannerComponent } from '../banner/banner.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { SummaryComponent } from './summary/summary.component';
-import { ChatbotComponent } from "../chatbot/chatbot.component";
+import { ChatbotComponent } from '../chatbot/chatbot.component';
 
 
 @Component({

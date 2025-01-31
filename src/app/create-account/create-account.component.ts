@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BannerComponent } from '../banner/banner.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 
@@ -7,11 +9,13 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   standalone: true,
   imports: [
     SidebarComponent,
-    BannerComponent 
+    BannerComponent,
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './create-account.component.html',
-  styleUrl: './create-account.component.css'
+  styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent {
-
+  // Ajouter la logique pour soumettre le formulaire
 }

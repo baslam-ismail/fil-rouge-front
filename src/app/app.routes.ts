@@ -7,6 +7,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { CustomerPortfolioComponent } from './customer-portfolio/customer-portfolio.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent},
@@ -17,4 +18,7 @@ export const routes: Routes = [
     { path: 'bank-operations', component: BankOperationsComponent},
     { path: 'help-bank-advisor', component: HelpBankAdvisorComponent},
     { path: 'profil', component: ProfilComponent},
+    { path: 'create-account', component: CreateAccountComponent },
+    { path: 'chatbot', component: ChatbotComponent}
+
 ];
