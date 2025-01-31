@@ -1,1 +1,17 @@
-<p>chatbot works!</p>
+<div class="chatbot-container">
+  <div class="chat-icon" (click)="toggleChat()">
+      🤖
+  </div>
+
+  <div class="chat-window" *ngIf="isChatOpen">
+    <div class="chat-header">
+      Chatbot
+      <button class="close-btn" (click)="toggleChat()">X</button>
+    </div>
+
+    <div class="chat-body">
+      <div *ngFor="let message of messages" class="message">{{ message }}</div>
+      <input type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" placeholder="Écrivez un message..." />
+    </div>
+  </div>
+</div>
