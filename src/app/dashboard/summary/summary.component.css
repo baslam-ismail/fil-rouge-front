@@ -1,9 +1,13 @@
 .summary-container {
     display: flex;
-    gap: 150px; /* Espacement entre les blocs */
+    gap: 150px; 
     margin-top: 20px;
+<<<<<<< HEAD
     justify-content: center; /* Centrage des blocs */
     
+=======
+    justify-content: center; 
+>>>>>>> 5027c56 (Ajout du widget calendar avec la libraire Tailwind CSS et l'UI Flowbite)
   }
   
   .summary-item {
@@ -11,7 +15,7 @@
     color: #fff;
     border-radius: 12px;
     padding: 40px;
-    width: 300px; /* Taille uniforme */
+    width: 300px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
