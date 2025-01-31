@@ -3,6 +3,7 @@
     gap: 150px; /* Espacement entre les blocs */
     margin-top: 20px;
     justify-content: center; /* Centrage des blocs */
+    
   }
   
   .summary-item {
@@ -21,5 +22,9 @@
     padding: 10px;
     font-size: 0.9rem;
     color: #ccc;
+  }
+  .summary-item h3 a {
+    text-decoration: none;
+    color: white;
   }
   

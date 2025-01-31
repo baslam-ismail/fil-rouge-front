@@ -12,7 +12,9 @@ import { FormsModule } from '@angular/forms';
 export class ChatbotComponent {
   isChatOpen = false;
   userMessage = '';
-  messages: string[] = ['Bienvenue ! Comment puis-je vous aider ?'];
+  messages: { sender: string; text: string }[] = [
+    { sender: 'bot', text: 'Bienvenue ! Comment puis-je vous aider ?' }
+  ];
 
   toggleChat() {
     this.isChatOpen = !this.isChatOpen;
@@ -20,8 +22,14 @@ export class ChatbotComponent {
 
   sendMessage() {
     if (this.userMessage.trim()) {
-      this.messages.push(`Vous: ${this.userMessage}`);
+      // Ajouter le message de l'utilisateur
+      this.messages.push({ sender: 'user', text: this.userMessage });
       this.userMessage = '';
+
+      // Ajouter une réponse du chatbot après un délai
+      setTimeout(() => {
+        this.messages.push({ sender: 'bot', text: 'Je suis un chatbot ! 😊' });
+      }, 1000);
     }
   }
 }

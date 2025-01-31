@@ -1,4 +1,75 @@
 <app-sidebar></app-sidebar>
 <div class="main-content">
   <app-banner></app-banner>
+
+  <!-- Conteneur principal -->
+  <div class="customer-portfolio-container">
+    <h2>Portefeuille client</h2>
+
+    <input type="text" class="search-bar" placeholder="Recherche">
+
+    <table class="clients-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Adresse</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of paginatedClients()" (click)="openClientDetails(client)">
+          <td>{{ client.id }}</td>
+          <td>{{ client.lastName }}</td>
+          <td>{{ client.firstName }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.phone }}</td>
+          <td>{{ client.address }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span>Affichage des données {{ pagination.start }} à {{ pagination.end }} sur {{ clients.length }} entrées</span>
+
+    <!-- Contrôles de pagination -->
+    <div class="pagination-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">«</button>
+      <button *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">»</button>
+    </div>
+
+    <!-- Modale des détails du client -->
+    <div class="modal-overlay" *ngIf="selectedClient">
+      <div class="modal-content">
+        <span class="close-btn" (click)="closeClientDetails()">&times;</span>
+        <h3>Détails du client</h3>
+        <form>
+          <div class="form-group">
+            <label>Nom</label>
+            <input [(ngModel)]="selectedClient.lastName" />
+          </div>
+          <div class="form-group">
+            <label>Prénom</label>
+            <input [(ngModel)]="selectedClient.firstName" />
+          </div>
+          <div class="form-group">
+            <label>Numéro de téléphone</label>
+            <input [(ngModel)]="selectedClient.phone" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input [(ngModel)]="selectedClient.email" />
+          </div>
+          <div class="form-group">
+            <label>Adresse postale</label>
+            <input [(ngModel)]="selectedClient.address" />
+          </div>
+          <button type="button" (click)="updateClient()">Mettre à jour</button>
+          <button type="button" class="delete-btn" (click)="deleteClient()">Supprimer</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
