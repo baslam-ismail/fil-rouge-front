@@ -3,11 +3,15 @@
     gap: 150px; 
     margin-top: 20px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     justify-content: center; /* Centrage des blocs */
     
 =======
     justify-content: center; 
 >>>>>>> 5027c56 (Ajout du widget calendar avec la libraire Tailwind CSS et l'UI Flowbite)
+=======
+    justify-content: center; 
+>>>>>>> 4da9635e99ee1b8ad69b2e03c89302431c4fcd4b
   }
   
   .summary-item {
