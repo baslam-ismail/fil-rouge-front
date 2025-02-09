@@ -34,7 +34,7 @@ export class CalendarComponent implements OnInit {
         weekStart: 1,
         minDate: new Date(),
         todayHighlight: true,
-        daysOfWeekDisabled: [0],
+        daysOfWeekDisabled: [0,6],
       });
       console.log('datepicker', date);
     }
