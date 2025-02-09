@@ -16,7 +16,8 @@ export class AppComponent {
   title = 'front-malsi';
 
   ngOnInit(): void {
+    if (typeof document !== 'undefined') {
       initFlowbite();
-
+    }
   }
 }

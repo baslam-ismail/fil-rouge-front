@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidebarItemsComponent } from './sidebar-items.component';
+import { CalendarFormComponent } from './calendar-form.component';
 
-describe('SidebarItemsComponent', () => {
-  let component: SidebarItemsComponent;
-  let fixture: ComponentFixture<SidebarItemsComponent>;
+describe('CalendarFormComponent', () => {
+  let component: CalendarFormComponent;
+  let fixture: ComponentFixture<CalendarFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SidebarItemsComponent]
+      imports: [CalendarFormComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SidebarItemsComponent);
+    fixture = TestBed.createComponent(CalendarFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

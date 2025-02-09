@@ -7,16 +7,15 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { CustomerPortfolioComponent } from './customer-portfolio/customer-portfolio.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProfilComponent } from './profil/profil.component';
-<<<<<<< HEAD
 import { ChatbotComponent } from './chatbot/chatbot.component';
-=======
 import { CalendarComponent } from './dashboard/calendar/calendar.component';
->>>>>>> 5027c56 (Ajout du widget calendar avec la libraire Tailwind CSS et l'UI Flowbite)
+import { CalendarFormComponent } from './dashboard/calendar/calendar-form/calendar-form.component';
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent},
     { path: 'calendar', component: CalendarComponent},
+    { path: 'calendar-form', component: CalendarFormComponent}, 
     { path: 'create-account', component: CreateAccountComponent},
     { path: 'customer-portfolio', component: CustomerPortfolioComponent},
     { path: 'appointments', component: AppointmentsComponent},
