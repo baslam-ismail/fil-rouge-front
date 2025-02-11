@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CalendarComponent } from "../calendar/calendar.component";
+import { CalendarWidgetComponent } from "../calendar-widget/calendar-widget.component";
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CalendarComponent],
+  imports: [RouterLink, RouterLinkActive, CalendarWidgetComponent],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.css'
 })

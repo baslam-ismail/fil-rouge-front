@@ -1,18 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BannerComponent } from '../../banner/banner.component';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { SidebarComponent } from "../../../sidebar/sidebar.component";
-import { BannerComponent } from "../../../banner/banner.component";
 
 @Component({
-  selector: 'app-calendar-form',
+  selector: 'app-appointments-form',
   standalone: true,
   imports: [FormsModule, CommonModule, SidebarComponent, BannerComponent],
-  templateUrl: './calendar-form.component.html',
-  styleUrl: './calendar-form.component.css'
+  templateUrl: './appointments-form.component.html',
+  styleUrl: './appointments-form.component.css'
 })
-export class CalendarFormComponent {
+export class AppointmentsFormComponent {
   public selectedDate!: string;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
@@ -29,5 +29,4 @@ export class CalendarFormComponent {
     console.log('Form submitted', form);
     this.router.navigate(['/appointments']);
   }
-
 }

@@ -8,18 +8,22 @@ import { CustomerPortfolioComponent } from './customer-portfolio/customer-portfo
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { CalendarWidgetComponent } from './dashboard/calendar-widget/calendar-widget.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
 import { CalendarComponent } from './dashboard/calendar/calendar.component';
 import { CalendarFormComponent } from './dashboard/calendar/calendar-form/calendar-form.component';
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
-import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component'; 
+import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component';
 import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
 
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent},
+    { path: 'calendar-widegt', component: CalendarWidgetComponent},
     { path: 'calendar', component: CalendarComponent},
-    { path: 'calendar-form', component: CalendarFormComponent}, 
+    { path: 'appointments-form', component: AppointmentsFormComponent},
     { path: 'create-account', component: CreateAccountComponent},
     { path: 'customer-portfolio', component: CustomerPortfolioComponent},
     { path: 'appointments', component: AppointmentsComponent},
@@ -36,5 +40,5 @@ export const routes: Routes = [
     { path: 'profil', component: ProfilComponent },
     { path: 'chatbot', component: ChatbotComponent },
     { path: 'operations-form', component: OperationsFormComponent },
-    { path: 'requests-form', component: RequestsFormComponent }, 
+    { path: 'requests-form', component: RequestsFormComponent },
 ];
