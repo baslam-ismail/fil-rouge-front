@@ -9,43 +9,43 @@
     <nav class="menu">
       <ul>
         <li class="menu-item active">
-          <a routerLink="/dashboard">
+          <a routerLink="/dashboard" routerLinkActive="active">
             <span class="icon">🏠</span>
             Tableau de bord
           </a>
         </li>
         <li class="menu-item">
-          <a routerLink="/create-account">
+          <a routerLink="/create-account" routerLinkActive="active">
             <span class="icon">👤</span>
             Création de compte
           </a>
         </li>
         <li class="menu-item">
-          <a routerLink="/portfolio">
+          <a routerLink="/customer-portfolio" routerLinkActive="active">
             <span class="icon">📂</span>
             Portefeuille Client
           </a>
         </li>
         <li class="menu-item">
-          <a routerLink="/appointments">
+          <a routerLink="/appointments" routerLinkActive="active">
             <span class="icon">📅</span>
             Rendez-vous
           </a>
         </li>
         <li class="menu-item">
-          <a routerLink="/service-requests">
+          <a routerLink="/service-requests" routerLinkActive="active">
             <span class="icon">📝</span>
             Demandes de services
           </a>
         </li>
         <li class="menu-item">
-          <a routerLink="/daily-operations">
-            <span class="icon">💳</span>
-            Opérations quotidiennes
-          </a>
-        </li>
+            <a routerLink="/bank-operations" routerLinkActive="active"> <!-- Opérations quotidiennes -->
+              <span class="icon">💳</span>
+              Opérations quotidiennes
+            </a>
+          </li>
         <li class="menu-item">
-          <a routerLink="/help">
+          <a routerLink="/help-bank-advisor" routerLinkActive="active">
             <span class="icon">❓</span>
             Aide
           </a>
@@ -57,9 +57,12 @@
       <div class="user-info">
         <img src="assets/images/macron.jpg" alt="User Profile">
         <div>
-          <span class="user-name">Evano </span>
+          <a routerLink="/profil" routerLinkActive="active" class="user-name">Evano </a>
           <br>
-          <span class="user-role">Conseiller bancaire</span>
+          <span class="user-role">
+            <a routerLink="/login" routerLinkActive="active" ></a> 
+            bancaire</span>
+
         </div>
       </div>
       <a href="#" class="logout">Se déconnecter</a>

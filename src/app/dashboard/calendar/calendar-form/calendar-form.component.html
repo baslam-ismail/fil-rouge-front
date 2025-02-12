@@ -1,0 +1,67 @@
+<app-sidebar></app-sidebar>
+<div class="main-content">
+  <app-banner></app-banner>
+
+  <div class="create-appointment-container">
+    <h2>Créer un rendez-vous</h2>
+    <p>Date sélectionnée : {{ selectedDate | date: 'EEEE dd MMMM YYYY' }}</p>
+    <form class="appointment-form" (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <div class="form-group">
+        <label for="firstName">Prénom</label>
+        <input type="text" id="firstName" name="firstName" ngModel placeholder="Entrez le prénom" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Nom</label>
+        <input type="text" id="lastName" name="lastName" ngModel placeholder="Entrez le nom" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" ngModel placeholder="Entrez l'email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Numéro de téléphone</label>
+        <input type="tel" id="phone" name="phone" ngModel placeholder="Entrez le numéro de téléphone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="timeSlot">Créneau horaire</label>
+        <select id="timeSlot" name="timeSlot" ngModel required>
+          <option value="09:00-10:00">09:00 - 10:00</option>
+          <option value="10:00-11:00">10:00 - 11:00</option>
+          <option value="11:00-12:00">11:00 - 12:00</option>
+          <option value="13:00-14:00">13:00 - 14:00</option>
+          <option value="14:00-15:00">14:00 - 15:00</option>
+          <option value="15:00-16:00">15:00 - 16:00</option>
+          <option value="16:00-17:00">16:00 - 17:00</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reason">Motif de rendez-vous</label>
+        <textarea id="reason" name="reason" ngModel placeholder="Entrez le motif de rendez-vous" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Lieu</label>
+        <select id="location" name="location" ngModel required>
+          <option value="agence">En agence</option>
+          <option value="visio">En visio</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priorité</label>
+        <select id="priority" name="priority" ngModel required>
+          <option value="basse">Basse</option>
+          <option value="moyenne">Moyenne</option>
+          <option value="haute">Haute</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn">Valider</button>
+    </form>
+  </div>
+</div>

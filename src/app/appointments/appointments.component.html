@@ -1,0 +1,58 @@
+<app-sidebar></app-sidebar>
+<div class="main-content">
+  <app-banner></app-banner>
+
+  <div class="appointments-container">
+    <h2>Rendez-vous</h2>
+
+    <button class="create-appointment-btn">Créer rendez-vous</button>
+
+    <div class="table-controls">
+      <input type="text" class="search-bar" placeholder="Recherche" />
+      <select class="sort-dropdown">
+        <option>Trier par :</option>
+        <option>Nom client</option>
+        <option>Date</option>
+        <option>Priorité</option>
+      </select>
+    </div>
+
+    <table class="appointments-table">
+      <thead>
+        <tr>
+          <th>Motif</th>
+          <th>Nom client</th>
+          <th>Numéro client</th>
+          <th>Priorité</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of paginatedAppointments">
+          <td>{{ appointment.motif }}</td>
+          <td>{{ appointment.clientName }}</td>
+          <td>{{ appointment.clientNumber }}</td>
+          <td>{{ appointment.priority }}</td>
+          <td>{{ appointment.date | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <select [(ngModel)]="appointment.status" class="status-dropdown">
+              <option>Confirmé</option>
+              <option>En attente</option>
+              <option>Annulé</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="table-pagination">
+      <span>Affichage des données {{ displayStart }} à {{ displayEnd }} sur {{ appointments.length }} entrées</span>
+      <div class="pagination-controls">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">«</button>
+        <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)" [class.active]="currentPage === i + 1">{{ i + 1 }}</button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">»</button>
+      </div>
+    </div>
+  </div>
+</div>

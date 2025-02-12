@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
+  standalone: true,
   styleUrls: ['./banner.component.css']
 })
 export class BannerComponent {

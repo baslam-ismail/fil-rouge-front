@@ -1,14 +1,6 @@
-<!--<app-client></app-client>-->
-
-
-<div class="container">
-  <h1>Exemple d'utilisation du tableau partagé</h1>
-
-  <shared-table
-    [columns]="columns"
-    [data]="data"
-    [options]="tableOptions"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)"
-  ></shared-table>
+<app-sidebar></app-sidebar>
+<div class="main-content">
+  <app-banner></app-banner>
+  <app-summary></app-summary> <!-- Summary gère Agenda et Demandes de services -->
 </div>
+<router-outlet></router-outlet>
