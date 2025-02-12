@@ -1,0 +1,130 @@
+<div class="table-container">
+  <!-- Barre d'outils -->
+  <div class="toolbar">
+    <!-- Recherche -->
+    @if (options.showSearch) {
+      <div class="search-box">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="onSearch()"
+          placeholder="Rechercher..."
+          class="search-input"
+        />
+      </div>
+    }
+
+    <!-- Boutons d'action -->
+    <div class="action-buttons">
+      @if (options.showColumnSelector) {
+        <button (click)="toggleColumnSelector()" class="btn">
+          Colonnes
+        </button>
+      }
+
+      @if (options.showExport) {
+        <div class="dropdown">
+          <button (click)="showExportMenu = !showExportMenu" class="btn">
+            Exporter
+          </button>
+          @if (showExportMenu) {
+            <div class="dropdown-menu">
+              <button (click)="exportData('excel')" class="dropdown-item">Excel</button>
+              <button (click)="exportData('csv')" class="dropdown-item">CSV</button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Sélecteur de colonnes -->
+  @if (showColumnSelector) {
+    <div class="column-selector">
+      @for (col of columns; track col.key) {
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            [checked]="col.visible !== false"
+            (change)="toggleColumn(col)"
+          />
+          {{ col.label }}
+        </label>
+      }
+    </div>
+  }
+
+  <!-- Table -->
+  <table>
+    <thead>
+    <tr>
+      <th>
+        <input
+          type="checkbox"
+          [checked]="areAllSelected"
+          (change)="toggleAllRows()"
+        />
+      </th>
+      @for (col of visibleColumns; track col.key) {
+        <th
+          [class.sortable]="col.sortable"
+          (click)="col.sortable && sortBy(col.key)"
+        >
+          {{ col.label }}
+          @if (col.sortable) {
+            <span class="sort-icon">
+                    {{ currentSort?.key === col.key ? (currentSort?.direction === 'asc' ? '↑' : '↓') : '' }}
+                  </span>
+          }
+        </th>
+      }
+      @if (options.actionsColumn) {
+        <th>Actions</th>
+      }
+    </tr>
+    </thead>
+    <tbody>
+      @for (row of paginatedData; track row.id) {
+        <tr [class.selected]="selectedRows.has(row.id)">
+          <td>
+            <input
+              type="checkbox"
+              [checked]="selectedRows.has(row.id)"
+              (change)="toggleRow(row)"
+            />
+          </td>
+          @for (col of visibleColumns; track col.key) {
+            <td>{{ row[col.key] }}</td>
+          }
+          @if (options.actionsColumn) {
+            <td class="actions">
+              <button (click)="edit.emit(row)" class="btn-icon">✏️</button>
+              <button (click)="delete.emit(row)" class="btn-icon">🗑️</button>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  @if (options.pageSize) {
+    <div class="pagination">
+      <button
+        (click)="previousPage()"
+        [disabled]="currentPage === 1"
+        class="btn"
+      >
+        Précédent
+      </button>
+      <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+      <button
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+        class="btn"
+      >
+        Suivant
+      </button>
+    </div>
+  }
+</div>
