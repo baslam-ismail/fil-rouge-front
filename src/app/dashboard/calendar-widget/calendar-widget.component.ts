@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class CalendarWidgetComponent implements OnInit {
   constructor(private flowbiteService: FlowbiteService, private router: Router) {
     afterNextRender(() => {
-      // this only runs in the browser
       this.flowbiteService.loadFlowbite((flowbite) => {
         console.log('Flowbite loaded', flowbite);
       });
