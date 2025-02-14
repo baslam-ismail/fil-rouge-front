@@ -7,17 +7,22 @@ import { CustomerPortfolioComponent } from './customer-portfolio/customer-portfo
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
+import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component'; // ✅ Chemin corrigé
+import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
 
 export const routes: Routes = [
-    { path: '', component: DashboardComponent},
-    { path: 'dashboard', component: DashboardComponent},
-    { path: 'create-account', component: CreateAccountComponent},
-    { path: 'customer-portfolio', component: CustomerPortfolioComponent},
-    { path: 'appointments', component: AppointmentsComponent},
-    { path: 'bank-operations', component: BankOperationsComponent},
-    { path: 'help-bank-advisor', component: HelpBankAdvisorComponent},
-    { path: 'profil', component: ProfilComponent},
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Redirection par défaut
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard-customer', component: DashboardCustomerComponent },
     { path: 'create-account', component: CreateAccountComponent },
-    { path: 'chatbot', component: ChatbotComponent}
-
+    { path: 'customer-portfolio', component: CustomerPortfolioComponent },
+    { path: 'appointments', component: AppointmentsComponent },
+    { path: 'bank-operations', component: BankOperationsComponent },
+    { path: 'help-bank-advisor', component: HelpBankAdvisorComponent },
+    { path: 'profil', component: ProfilComponent },
+    { path: 'chatbot', component: ChatbotComponent },
+    { path: 'operations-form', component: OperationsFormComponent },
+    { path: 'requests-form', component: RequestsFormComponent }, // ✅ Route corrigée
+    { path: '**', redirectTo: 'dashboard' } // Gestion des erreurs de routes
 ];
