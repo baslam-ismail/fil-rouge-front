@@ -10,6 +10,10 @@ import { ProfilComponent } from './profil/profil.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { CalendarComponent } from './dashboard/calendar/calendar.component';
 import { CalendarFormComponent } from './dashboard/calendar/calendar-form/calendar-form.component';
+import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
+import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component'; 
+import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
+
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent},
@@ -22,7 +26,15 @@ export const routes: Routes = [
     { path: 'bank-operations', component: BankOperationsComponent},
     { path: 'help-bank-advisor', component: HelpBankAdvisorComponent},
     { path: 'profil', component: ProfilComponent},
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard-customer', component: DashboardCustomerComponent },
     { path: 'create-account', component: CreateAccountComponent },
-    { path: 'chatbot', component: ChatbotComponent}
-
+    { path: 'customer-portfolio', component: CustomerPortfolioComponent },
+    { path: 'appointments', component: AppointmentsComponent },
+    { path: 'bank-operations', component: BankOperationsComponent },
+    { path: 'help-bank-advisor', component: HelpBankAdvisorComponent },
+    { path: 'profil', component: ProfilComponent },
+    { path: 'chatbot', component: ChatbotComponent },
+    { path: 'operations-form', component: OperationsFormComponent },
+    { path: 'requests-form', component: RequestsFormComponent }, 
 ];
