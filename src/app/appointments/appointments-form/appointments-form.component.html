@@ -29,6 +29,7 @@
       <div class="form-group">
         <label for="timeSlot">Créneau horaire</label>
         <select id="timeSlot" name="timeSlot" ngModel required>
+          <option value="" disabled selected>Choisissez un créneau</option>
           <option value="09:00-10:00">09:00 - 10:00</option>
           <option value="10:00-11:00">10:00 - 11:00</option>
           <option value="11:00-12:00">11:00 - 12:00</option>
@@ -47,6 +48,7 @@
       <div class="form-group">
         <label for="location">Lieu</label>
         <select id="location" name="location" ngModel required>
+          <option value="" disabled selected>Choisissez un lieu</option>
           <option value="agence">En agence</option>
           <option value="visio">En visio</option>
         </select>
@@ -55,6 +57,7 @@
       <div class="form-group">
         <label for="priority">Priorité</label>
         <select id="priority" name="priority" ngModel required>
+          <option value="" disabled selected>Choisissez une priorité</option>
           <option value="basse">Basse</option>
           <option value="moyenne">Moyenne</option>
           <option value="haute">Haute</option>

@@ -42,6 +42,6 @@ export class CalendarWidgetComponent implements OnInit {
   onDatePicked($event: any) {
     this.selectedDate = new Date($event.detail.date);
     console.log('onDatePicked', this.selectedDate);
-    this.router.navigate(['/appointments-form'], { queryParams: { date: this.selectedDate.toISOString() } });
+    this.router.navigate(['/calendar'], { queryParams: { date: this.selectedDate.toISOString() } });
   }
 }
