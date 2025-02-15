@@ -13,7 +13,7 @@ import {ExportService} from "../../services/export.service";
   standalone: true,
   imports: [
     FormsModule,
-    NgTemplateOutlet
+    //NgTemplateOutlet
   ],
   styleUrls: ['./table.component.css']
 })
