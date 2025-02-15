@@ -12,7 +12,9 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, FullCalendarModule, SidebarComponent],
+  imports: [CommonModule, 
+          FullCalendarModule,
+           SidebarComponent],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
