@@ -21,7 +21,7 @@ import { RequestsFormComponent } from './dashboard-customer/requests-form/reques
 export const routes: Routes = [
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent},
-    { path: 'calendar-widegt', component: CalendarWidgetComponent},
+    { path: 'calendar-widget', component: CalendarWidgetComponent},
     { path: 'calendar', component: CalendarComponent},
     { path: 'appointments-form', component: AppointmentsFormComponent},
     { path: 'create-account', component: CreateAccountComponent},

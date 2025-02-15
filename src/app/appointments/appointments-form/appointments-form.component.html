@@ -7,6 +7,11 @@
     <p>Date sélectionnée : {{ selectedDate | date: 'EEEE dd MMMM YYYY' }}</p>
     <form class="appointment-form" (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="form-group">
+        <label for="title">Titre</label>
+        <input type="text" id="title" name="title" ngModel placeholder="Entrez le titre" required>
+      </div>
+      
+      <div class="form-group">
         <label for="firstName">Prénom</label>
         <input type="text" id="firstName" name="firstName" ngModel placeholder="Entrez le prénom" required>
       </div>
