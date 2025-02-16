@@ -10,6 +10,11 @@ import { ProfilComponent } from './profil/profil.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { CalendarComponent } from './dashboard/calendar/calendar.component';
 import { CalendarFormComponent } from './dashboard/calendar/calendar-form/calendar-form.component';
+import { LoginComponent } from './login/login.component';
+import { CreateAdvisorComponent } from './create-advisor/create-advisor.component';
+import { ListAdvisorsComponent } from './list-advisors/list-advisors.component';
+import { ClientManagementComponent } from './client-management/client-management.component';
+
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent},
@@ -23,6 +28,10 @@ export const routes: Routes = [
     { path: 'help-bank-advisor', component: HelpBankAdvisorComponent},
     { path: 'profil', component: ProfilComponent},
     { path: 'create-account', component: CreateAccountComponent },
-    { path: 'chatbot', component: ChatbotComponent}
+    { path: 'chatbot', component: ChatbotComponent},
+    {path : 'login', component: LoginComponent},
+    { path: 'create-advisor', component: CreateAdvisorComponent },
+    { path: 'list-advisors', component: ListAdvisorsComponent },
+    { path: 'client-management', component:ClientManagementComponent}
 
 ];

@@ -1,0 +1,27 @@
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+  <app-banner></app-banner>
+  <div class="list-advisors-container">
+    <h2>Liste des conseillers</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let advisor of advisors">
+          <td>{{ advisor.lastname }}</td>
+          <td>{{ advisor.firstname }}</td>
+          <td>{{ advisor.email }}</td>
+          <td>{{ advisor.phone }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

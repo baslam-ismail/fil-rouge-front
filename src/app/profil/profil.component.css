@@ -1,0 +1,104 @@
+.main-content {
+    margin-left: 270px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Récapitulatif */
+  .summary-container {
+    width: 90%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .summary-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .summary-item {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+  }
+  
+  .summary-item h3 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  /* Conteneur unique pour le profil et le mot de passe */
+  .profile-container {
+    width: 90%;
+    max-width: 800px;
+    background-color: black;
+    color: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  td[colspan="4"] {
+    text-align: center;
+  }
+  
+  /* Formulaires */
+  label {
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  /* Bouton */
+  .btn-save {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn-save:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Chatbot */
+  .chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    z-index: 1000;
+  }
+  
