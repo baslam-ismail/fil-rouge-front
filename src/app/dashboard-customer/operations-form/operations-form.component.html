@@ -7,27 +7,28 @@
 
     <form (submit)="submitRequest()">
       <div class="form-group">
+        <label for="accountNumber">Numéro de Compte :</label>
+        <input id="accountNumber" [(ngModel)]="operationData.accountNumber" type= "number" name="accountNumber" required>
+      </div>
+      
+      <div class="form-group">
         <label for="operationType">Type d'Opération :</label>
         <select id="operationType" [(ngModel)]="operationData.type" name="operationType" required>
           <option value="" disabled selected>Choisissez une opération</option>
-          <option value="contestation">Contestation d'une opération</option>
-          <option value="virement">Mise en place d'un virement</option>
-          <option value="autre">Autre</option>
+          <option value="contestation">Prélèvement</option>
+          <option value="virement">Virement</option>
+          <option value="autre">Carte Bleue</option>
         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Titre :</label>
+        <input id="amount" [(ngModel)]="operationData.title" name="title" required>
       </div>
 
       <div class="form-group">
         <label for="description">Description :</label>
         <textarea id="description" [(ngModel)]="operationData.description" name="description" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="urgency">Urgence :</label>
-        <select id="urgency" [(ngModel)]="operationData.urgency" name="urgency">
-          <option value="basse">Basse</option>
-          <option value="moyenne">Moyenne</option>
-          <option value="haute">Haute</option>
-        </select>
       </div>
 
       <button type="submit" class="submit-btn">Envoyer la Demande</button>
