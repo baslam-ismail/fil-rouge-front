@@ -69,10 +69,3 @@
   .submit-btn:hover {
     background-color: #0056b3;
   }
-
-  #timeSlot,
-  #reason,
-  #location,
-  #priority {
-    color: #000000; /* Texte en noir */
-  }
