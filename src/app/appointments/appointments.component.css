@@ -130,3 +130,7 @@ body {
   cursor: not-allowed;
 }
 
+.table-controls {
+  color: black;
+}
+
