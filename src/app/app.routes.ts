@@ -11,8 +11,6 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
 import { CalendarWidgetComponent } from './dashboard/calendar-widget/calendar-widget.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
-import { CalendarComponent } from './dashboard/calendar/calendar.component';
-import { CalendarFormComponent } from './dashboard/calendar/calendar-form/calendar-form.component';
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
 import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component';
 import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
