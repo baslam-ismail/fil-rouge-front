@@ -10,6 +10,11 @@ import { ProfilComponent } from './profil/profil.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { CalendarComponent } from './dashboard/calendar/calendar.component';
 import { CalendarFormComponent } from './dashboard/calendar/calendar-form/calendar-form.component';
+import { LoginComponent } from './login/login.component';
+import { CreateAdvisorComponent } from './create-advisor/create-advisor.component';
+import { ListAdvisorsComponent } from './list-advisors/list-advisors.component';
+import { ClientManagementComponent } from './client-management/client-management.component';
+
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
 import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component'; 
 import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
@@ -37,4 +42,10 @@ export const routes: Routes = [
     { path: 'chatbot', component: ChatbotComponent },
     { path: 'operations-form', component: OperationsFormComponent },
     { path: 'requests-form', component: RequestsFormComponent }, 
+    { path: 'chatbot', component: ChatbotComponent},
+    {path : 'login', component: LoginComponent},
+    { path: 'create-advisor', component: CreateAdvisorComponent },
+    { path: 'list-advisors', component: ListAdvisorsComponent },
+    { path: 'client-management', component:ClientManagementComponent}
+
 ];

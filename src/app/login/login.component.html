@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="login-wrapper">
+  <div class="login-box">
+    <!-- Partie gauche : Formulaire -->
+    <div class="form-section">
+      <div class="logo-title">
+        <img src="assets/images/logo.png" alt="Logo MALSI" class="logo">
+        <h1 class="title">MALSI</h1>
+      </div>
+
+      <h2 class="welcome-message">Bienvenue 👋</h2>
+
+      <p class="subtitle">
+        Aujourd’hui, tout est possible. Connectez-vous et faites avancer vos projets avec énergie et inspiration !
+      </p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="Example@email.com" required />
+
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" formControlName="password" placeholder="***********" required />
+
+        <a href="#" class="forgot-password">Mot de passe oublié?</a>
+
+        <button type="submit" class="submit-btn">Se connecter</button>
+      </form>
+
+      <p class="footer">© 2024 ALL RIGHTS RESERVED</p>
+    </div>
+
+    <!-- Partie droite : Image -->
+    <div class="image-section">
+      <img src="assets/images/login.jpg" alt="Image de connexion">
+    </div>
+  </div>
+</div>

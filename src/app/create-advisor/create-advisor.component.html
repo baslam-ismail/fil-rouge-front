@@ -1,0 +1,36 @@
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+  <app-banner></app-banner>
+  <div class="create-advisor-container">
+    <h2>Créer un compte conseiller</h2>
+
+    <form class="advisor-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="lastname">Nom</label>
+        <input type="text" id="lastname" [(ngModel)]="advisorData.lastname" name="lastname" placeholder="Entrez le nom"
+          required />
+      </div>
+
+      <div class="form-group">
+        <label for="firstname">Prénom</label>
+        <input type="text" id="firstname" [(ngModel)]="advisorData.firstname" name="firstname"
+          placeholder="Entrez le prénom" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="advisorData.email" name="email" placeholder="Entrez l'email"
+          required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Numéro de téléphone</label>
+        <input type="text" id="phone" [(ngModel)]="advisorData.phone" name="phone"
+          placeholder="Entrez le numéro de téléphone" required />
+      </div>
+
+      <button type="submit" class="submit-btn">Enregistrer</button>
+    </form>
+  </div>
+</div>

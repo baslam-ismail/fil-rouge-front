@@ -1,9 +1,10 @@
 import { Component} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {BannerComponent} from "./banner/banner.component";
 import {SummaryComponent} from "./dashboard/summary/summary.component";
+import { ChatbotComponent } from "./chatbot/chatbot.component";
 
 
 @Component({
@@ -11,10 +12,12 @@ import {SummaryComponent} from "./dashboard/summary/summary.component";
   standalone: true, // Composant standalone
   imports: [
     RouterOutlet,
-    SidebarComponent,
+  /*  SidebarComponent,
     BannerComponent,
-    SummaryComponent,
+    SummaryComponent,*/
   ],
+    //ChatbotComponent
+
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -26,4 +29,5 @@ export class AppComponent {
       initFlowbite();
     }
   }
+ 
 }

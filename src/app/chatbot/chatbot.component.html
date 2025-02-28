@@ -2,15 +2,19 @@
   <div class="chat-icon" (click)="toggleChat()">
     🤖
   </div>
-  <div class="chat-window" *ngIf="isChatOpen">
-    <div class="chat-header">
-      Chatbot
-      <button (click)="toggleChat()">X</button>
-    </div>
-    <div class="chat-body">
-      <div *ngFor="let message of messages">
-        <p [ngClass]="message.sender">{{ message.text }}</p>
+  <!-- Popup Modal -->
+  <div class="modal-overlay" *ngIf="isChatOpen">
+    <div class="chat-window">
+      <div class="chat-header">
+        Chatbot
+        <button class="close-btn" (click)="toggleChat()">X</button>
+      </div>
+      <div class="chat-body">
+        <div *ngFor="let message of messages">
+          <p [ngClass]="message.sender">{{ message.text }}</p>
+        </div>
       </div>
       <input type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" placeholder="Écrivez un message..." />
     </div>
+  </div>
 </div>

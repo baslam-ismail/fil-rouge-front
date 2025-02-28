@@ -1,1 +1,48 @@
-<p>profil works!</p>
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+  <app-banner></app-banner>
+
+  <!-- Tableau unique pour le profil et la modification du mot de passe -->
+  <div class="profile-container">
+    <h2>Modification du profil et mot de passe</h2>
+    <form>
+      <table>
+        <tr>
+          <td><label>Nom</label></td>
+          <td><input type="text" value="MOISANT"></td>
+          <td><label>Prénom</label></td>
+          <td><input type="text" value="Evano"></td>
+        </tr>
+        <tr>
+          <td><label>Numéro de téléphone</label></td>
+          <td><input type="text" value="0606060606"></td>
+          <td><label>Email</label></td>
+          <td><input type="email" value="evano@commercial-malsi.fr"></td>
+        </tr>
+        <tr>
+          <td><label>Adresse postale</label></td>
+          <td colspan="3"><input type="text" value="10 rue Albert Cachin, 75006, Paris"></td>
+        </tr>
+        <tr>
+          <td colspan="4"><button type="submit" class="btn-save">Modifier le profil</button></td>
+        </tr>
+        <tr>
+          <td><label>Ancien mot de passe</label></td>
+          <td><input type="password" value="LaROchelle99@@"></td>
+          <td><label>Nouveau mot de passe</label></td>
+          <td><input type="password"></td>
+        </tr>
+        <tr>
+          <td><label>Confirmer mot de passe</label></td>
+          <td colspan="3"><input type="password"></td>
+        </tr>
+        <tr>
+          <td colspan="4"><button type="submit" class="btn-save">Modifier le mot de passe</button></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+
+<app-chatbot class="chatbot-container"></app-chatbot>

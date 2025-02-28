@@ -1,0 +1,106 @@
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+  <app-banner></app-banner>
+
+  <div class="client-management-container">
+    <h2>Gestion des Clients</h2>
+
+    <!-- Liste des clients -->
+    <div class="clients-list">
+      <h3>Liste des Clients</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Attribuer à</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients">
+            <td>{{ client.name }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.phone }}</td>
+            <td>
+              <select [(ngModel)]="client.assignedAdvisor">
+                <option *ngFor="let advisor of advisors" [value]="advisor.id">{{ advisor.name }}</option>
+              </select>
+            </td>
+            <td>
+              <button (click)="assignClient(client)" class="assign-btn">Attribuer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Liste des tâches -->
+    <div class="tasks-list">
+      <h3>Liste des Tâches</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Type de demande</th>
+            <th>Catégorie</th>
+            <th>Conseiller</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of clientTasks">
+            <td>{{ task.nom }}</td>
+            <td>{{ task.prenom }}</td>
+            <td>
+              <select [(ngModel)]="task.typeDemande" (change)="updateCategories(task)">
+                <option value="">Sélectionner</option>
+                <option value="Service">Service</option>
+                <option value="Opération Bancaire">Opération Bancaire</option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="task.categorie" [disabled]="!task.typeDemande">
+                <option *ngFor="let cat of task.categoriesDisponibles" [value]="cat">
+                  {{ cat }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="task.conseiller">
+                <option value="">Sélectionner</option>
+                <option *ngFor="let conseiller of advisors" [value]="conseiller.id">
+                  {{ conseiller.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <button (click)="assignTask(task)" class="assign-btn">Attribuer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Portefeuille clients -->
+    <div class="portfolio-list">
+      <h3>Portefeuille Clients</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Conseiller</th>
+            <th>Clients attribués</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let advisor of advisors">
+            <td>{{ advisor.name }}</td>
+            <td>{{ advisor.clients.length }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

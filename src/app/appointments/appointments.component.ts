@@ -25,7 +25,7 @@ export class AppointmentsComponent implements OnInit {
     { motif: 'Assurance habitation', clientName: 'Maria SHARAPOVA', clientNumber: '07 09 49 67 43', priority: 'Moyenne', date: new Date('2024-05-20'), status: 'En attente' }
   ];
 
-  itemsPerPage = 2;
+  itemsPerPage = 5;
   currentPage = 1;
   totalPages = 0;
 

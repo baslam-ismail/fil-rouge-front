@@ -1,45 +1,90 @@
-<div class="summary-container">
+  
+  <!-- Contenu structuré -->
+  <div class="dashboard-grid">
     <app-calendar></app-calendar>
-
-
-  <div class="summary-item">
-    <h3>
-      <a routerLink="/service-requests" routerLinkActive="active">
-        Demandes de services
-      </a>
-    </h3>
-    <div class="summary-content">
-      <p>Ouverture compte - Alain FRENAULT</p>
-      <p>Assurance vie - Sofia ARLOUCHE</p>
-      <p>Demande prêt - Mamadou TOURE</p>
+  
+    <!-- Demandes de services -->
+    <div class="box">
+      
+      <h3> <a routerLink="/service-requests" routerLinkActive="active"> Demandes de services</a> </h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Libellé demande</th>
+            <th>Nom client</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ouverture compte</td>
+            <td>Alain FRENAULT</td>
+          </tr>
+          <tr>
+            <td>Assurance vie</td>
+            <td>Sofia ARLOUCHE</td>
+          </tr>
+          <tr>
+            <td>Demande prêt</td>
+            <td>Mamadou TOURE</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-</div>
 
-<div class="summary-container">
-  <div class="summary-item">
-    <h3>
-      <a routerLink="/customer-portfolio" routerLinkActive="active">
-        Portefeuille client
-      </a>
-      </h3>
-    <div class="summary-content">
-      <p>N°19543 - Alain FRENAULT</p>
-      <p>N°19542 - Sofia ARLOUCHE</p>
-      <p>N°19541 - Mamadou TOURE</p>
+    <!-- Portefeuille client -->
+    <div class="box">
+      <h3><a routerLink="/customer-portfolio" routerLinkActive="active">Portefeuille client</a></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Numéro de compte</th>
+            <th>Nom client</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>N°19543</td>
+            <td>Alain FRENAULT</td>
+          </tr>
+          <tr>
+            <td>N°19542</td>
+            <td>Sofia ARLOUCHE</td>
+          </tr>
+          <tr>
+            <td>N°19541</td>
+            <td>Mamadou TOURE</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <!-- Opérations quotidiennes -->
+    <div class="box">
+      <h3><a routerLink="/bank-operations" routerLinkActive="active">Opérations quotidiennes</a></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Opération réalisée</th>
+            <th>Nom client</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Virement</td>
+            <td>Alain FRENAULT</td>
+          </tr>
+          <tr>
+            <td>Prélèvement</td>
+            <td>Sofia ARLOUCHE</td>
+          </tr>
+          <tr>
+            <td>Carte bancaire</td>
+            <td>Mamadou TOURE</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 
-  <div class="summary-item">
-    <h3>
-      <a routerLink="/bank-operations" routerLinkActive="active">
-        Opérations quotidiennes
-      </a>
-    </h3>
-    <div class="summary-content">
-      <p>Virement - Alain FRENAULT</p>
-      <p>Prélèvement - Sofia ARLOUCHE</p>
-      <p>Carte bancaire - Mamadou TOURE</p>
-    </div>
-  </div>
-</div>
+

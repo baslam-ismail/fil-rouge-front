@@ -5,7 +5,7 @@ import { CalendarComponent } from "../calendar/calendar.component";
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CalendarComponent],
+  imports: [CalendarComponent,RouterLink, RouterLinkActive],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.css'
 })

@@ -1,81 +1,94 @@
+/* Icone du chatbot */
 .chatbot-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
 }
 
 .chat-icon {
-    width: 60px;
-    height: 60px;
-    background-color: #00c853;
-    color: white;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  background-color:#00ff00;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Overlay pour le modal */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
 }
 
+/* Fenêtre du chatbot */
 .chat-window {
-  width: 300px;
-  background: white;
-  border: 1px solid #ccc;
+  width: 800px; /* Largeur ajustée */
+  height: 600px; /* Hauteur ajustée */
+  background: black;
+  border: 2px solid #00c853; /* Bordure ajoutée */
   border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  bottom: 60px;
-  right: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  max-height: 500px;
+  overflow: hidden;
 }
 
+/* Entête du chatbot */
 .chat-header {
-  background: #00ff00;
-  color: white;
-  padding: 10px;
+  background:#00ff00;
+  color: black;
+  padding: 15px;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #00a743;
 }
 
+.close-btn {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Corps du chatbot */
 .chat-body {
-  padding: 10px;
+  padding: 20px;
   flex-grow: 1;
   overflow-y: auto;
 }
 
 input {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
+  width: calc(100% - 40px);
+  margin: 10px 20px;
+  padding: 10px;
+  border: 2px solid #00ff00;
   border-radius: 5px;
-  margin-top: 10px;
 }
 
+/* Messages */
 .user {
   text-align: right;
-  color: blue;
+  color: white;
 }
 
 .bot {
   text-align: left;
-  color: green;
+  color: #00ff00;
 }
