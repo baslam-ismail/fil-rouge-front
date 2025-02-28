@@ -5,15 +5,14 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
-
-  templateUrl: './calendar.component.html',
   standalone: true,
-  styleUrl: './calendar.component.css'
+  imports: [],
+  templateUrl: './calendar-widget.component.html',
+  styleUrl: './calendar-widget.component.css'
 })
-export class CalendarComponent implements OnInit {
+export class CalendarWidgetComponent implements OnInit {
   constructor(private flowbiteService: FlowbiteService, private router: Router) {
     afterNextRender(() => {
-      // this only runs in the browser
       this.flowbiteService.loadFlowbite((flowbite) => {
         console.log('Flowbite loaded', flowbite);
       });
@@ -43,6 +42,6 @@ export class CalendarComponent implements OnInit {
   onDatePicked($event: any) {
     this.selectedDate = new Date($event.detail.date);
     console.log('onDatePicked', this.selectedDate);
-    this.router.navigate(['/calendar-form'], { queryParams: { date: this.selectedDate.toISOString() } });
+    this.router.navigate(['/calendar'], { queryParams: { date: this.selectedDate.toISOString() } });
   }
 }

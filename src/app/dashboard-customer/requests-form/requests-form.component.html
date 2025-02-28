@@ -7,14 +7,23 @@
 
     <form (submit)="submitRequest()">
       <div class="form-group">
+        <label for="accountNumber">Numéro de Compte :</label>
+        <input id="accountNumber" [(ngModel)]="requestData.accountNumber" type= "number" name="accountNumber" required>
+      </div>
+
+      <div class="form-group">
         <label for="subject">Objet :</label>
         <select id="subject" [(ngModel)]="requestData.subject" name="subject" required>
           <option value="" disabled selected>Choisissez un objet</option>
-          <option value="ouverture">Ouverture de compte</option>
-          <option value="pret">Demande de prêt</option>
-          <option value="assurance">Assurance</option>
-          <option value="autre">Autre</option>
+          <option value="ouverture">Compte épargne</option>
+          <option value="pret">Prêt</option>
+          <option value="autre">Assurance</option>
         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Titre :</label>
+        <input id="amount" [(ngModel)]="requestData.title" name="title" required>
       </div>
 
       <div class="form-group">

@@ -18,9 +18,11 @@ import { BannerComponent } from '../../banner/banner.component';  // ✅ Vérifi
 })
 export class OperationsFormComponent {
   operationData = {
+    accountNumber: '',
     type: '',
-    description: '',
-    urgency: 'moyenne'
+    title: '',
+    description: ''
+    
   };
 
   submitRequest() {
@@ -28,6 +30,6 @@ export class OperationsFormComponent {
     alert("Votre demande d'opération quotidienne a bien été envoyée !");
     
     // ✅ Réinitialisation du formulaire après soumission
-    this.operationData = { type: '', description: '', urgency: 'moyenne' };
+    this.operationData = { accountNumber:'', type: '', title: '', description: '' };
   }
 }

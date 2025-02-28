@@ -5,7 +5,7 @@
   <!-- Bloc principal pour la création de compte client -->
   <div class="create-account-container">
     <h2>Créer un compte client</h2>
-    <form class="account-form">
+    <form class="account-form" (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="form-group">
         <label for="lastname">Nom</label>
         <input type="text" id="lastname" placeholder="Entrez le nom" />
