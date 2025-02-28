@@ -14,11 +14,7 @@ import { ChatbotComponent } from "./chatbot/chatbot.component";
   standalone: true, // Composant standalone
   imports: [
     RouterOutlet,
-    SidebarComponent,
-    BannerComponent,
-    SummaryComponent,
-    ServiceRequestComponent,
-    DailyOperationsComponent,
+
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
