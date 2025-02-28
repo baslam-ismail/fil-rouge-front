@@ -1,0 +1,364 @@
+.service-requests-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/*!* Header Styles *!*/
+/*.page-header {*/
+/*  background-color: #2a2a2a;*/
+/*  padding: 1.5rem 2rem;*/
+/*  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+.page-header {
+  background-color: #2a2a2a;
+  padding: 1.5rem 2rem;
+  margin: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.title-section h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: white;
+
+}
+
+.subtitle {
+  color: #999;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #2A2A2A;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+.refresh-btn:hover {
+  background-color: #4a4a4a;
+}
+
+.refresh-icon {
+  font-size: 1.2rem;
+}
+
+/* Filters Section */
+.filters-section {
+  background-color: #2a2a2a;
+  padding: 1.5rem 2rem;
+  margin: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 200px;
+}
+
+.filter-group label {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.filter-group select,
+.filter-group input {
+  padding: 0.5rem;
+  background-color: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: #00ff9d;
+  outline: none;
+}
+
+.date-range {
+  flex-grow: 1;
+  max-width: 400px;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.date-inputs input {
+  flex: 1;
+}
+
+.date-inputs span {
+  color: #999;
+}
+
+.filters-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #3a3a3a;
+}
+
+.reset-btn {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background-color: #3a3a3a;
+  color: white;
+}
+
+/* Table Section */
+.table-section {
+  margin: 0 2rem 2rem;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-nouveau {
+  background-color: rgba(0, 255, 157, 0.1);
+  color: #00ff9d;
+}
+
+.status-en-cours {
+  background-color: rgba(255, 170, 0, 0.1);
+  color: #ffaa00;
+}
+
+/* Priority Badges */
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.priority-haute {
+  background-color: rgba(255, 69, 58, 0.1);
+  color: #ff453a;
+}
+
+.priority-moyenne {
+  background-color: rgba(255, 170, 0, 0.1);
+  color: #ffaa00;
+}
+
+.priority-basse {
+  background-color: rgba(48, 209, 88, 0.1);
+  color: #30d158;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .filters-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .date-range {
+    grid-column: span 2;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-header {
+    padding: 1rem;
+  }
+
+  .filters-section,
+  .table-section {
+    margin: 1rem;
+  }
+
+  .filters-container {
+    grid-template-columns: 1fr;
+  }
+
+  .date-range {
+    grid-column: span 1;
+  }
+
+  .title-section h1 {
+    font-size: 1.5rem;
+  }
+}btn {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   padding: 0.5rem 1rem;
+   background-color: #3a3a3a;
+   border: none;
+   border-radius: 4px;
+   color: white;
+   cursor: pointer;
+   transition: all 0.2s ease;
+ }
+
+select {
+  appearance: none;
+  background: #2A2A2A;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: white;
+  padding: 10px 12px;
+  padding-right: 36px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+
+  /* Flèche personnalisée */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+}
+
+select:hover {
+  border-color: #444;
+  background-color: #333;
+}
+
+select:focus {
+  outline: none;
+  border-color: #00FF9D;
+  box-shadow: 0 0 0 1px #00FF9D40;
+}
+
+/* Style pour les options du select */
+select option {
+  background-color: #2A2A2A;
+  color: white;
+  padding: 10px;
+}
+
+/* Style pour le label au-dessus du select */
+.filter-group {
+  margin-bottom: 16px;
+}
+
+.filter-group label {
+  display: block;
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+/* Container pour les filtres */
+.filters-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  background: #1E1E1E;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+/* Style pour le placeholder */
+select:invalid {
+  color: #666;
+}
+
+/* Style disabled */
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Style pour les inputs de date */
+.date-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-inputs input[type="date"] {
+  flex: 1;
+  background: #2A2A2A;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: white;
+  padding: 10px 12px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.date-inputs input[type="date"]:hover {
+  border-color: #444;
+  background-color: #333;
+}
+
+.date-inputs input[type="date"]:focus {
+  outline: none;
+  border-color: #00FF9D;
+  box-shadow: 0 0 0 1px #00FF9D40;
+}
+
+/* Style pour le texte "à" entre les dates */
+.date-inputs span {
+  color: #999;
+  font-size: 14px;
+}
+
+/* Personnalisation du calendrier natif */
+.date-inputs input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.date-inputs input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.8;
+}

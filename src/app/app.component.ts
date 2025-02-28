@@ -4,6 +4,8 @@ import { initFlowbite } from 'flowbite';
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {BannerComponent} from "./banner/banner.component";
 import {SummaryComponent} from "./dashboard/summary/summary.component";
+import {ServiceRequestComponent} from "./service-request/service-request.component";
+import {DailyOperationsComponent} from "./daily-operations/daily-operations.component";
 import { ChatbotComponent } from "./chatbot/chatbot.component";
 
 
@@ -12,12 +14,12 @@ import { ChatbotComponent } from "./chatbot/chatbot.component";
   standalone: true, // Composant standalone
   imports: [
     RouterOutlet,
-  /*  SidebarComponent,
+    SidebarComponent,
     BannerComponent,
-    SummaryComponent,*/
+    SummaryComponent,
+    ServiceRequestComponent,
+    DailyOperationsComponent,
   ],
-    //ChatbotComponent
-
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -29,5 +31,4 @@ export class AppComponent {
       initFlowbite();
     }
   }
- 
 }

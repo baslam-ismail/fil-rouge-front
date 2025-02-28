@@ -1,0 +1,116 @@
+.notifications-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.notification-toast {
+  background: #1E1E1E;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+  animation: slideIn 0.3s ease-out;
+  border: 1px solid #333;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.notification-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.notification-message {
+  color: white;
+  font-size: 14px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  margin: -4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Types de notifications */
+.notification-toast.success {
+  border-left: 4px solid #00FF9D;
+}
+
+.notification-toast.success .notification-icon {
+  color: #00FF9D;
+  background: rgba(0, 255, 157, 0.1);
+}
+
+.notification-toast.error {
+  border-left: 4px solid #FF453A;
+}
+
+.notification-toast.error .notification-icon {
+  color: #FF453A;
+  background: rgba(255, 69, 58, 0.1);
+}
+
+.notification-toast.info {
+  border-left: 4px solid #0A84FF;
+}
+
+.notification-toast.info .notification-icon {
+  color: #0A84FF;
+  background: rgba(10, 132, 255, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .notifications-container {
+    left: 20px;
+  }
+
+  .notification-toast {
+    min-width: 0;
+    width: 100%;
+  }
+}

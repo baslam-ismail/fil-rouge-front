@@ -1,0 +1,158 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: #1E1E1E;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.request-details {
+  padding: 24px;
+}
+
+.section-title {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 24px 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+  margin-top: 8px;
+}
+
+.form-group label {
+  color: #999;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Styles pour les champs en lecture seule */
+.form-group .readonly {
+  background: #1E1E1E;
+  border: 1px solid #333;
+  color: #999;
+  cursor: default;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Styles pour les champs modifiables */
+.form-group .editable {
+  padding: 10px 12px;
+  background: #2A2A2A;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.form-group .editable:focus {
+  border-color: #00FF9D;
+  outline: none;
+  box-shadow: 0 0 0 1px #00FF9D40;
+}
+
+.form-group textarea.editable {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
+
+.update-date {
+  color: #999;
+  font-size: 14px;
+}
+
+.update-btn {
+  padding: 10px 20px;
+  background: #00FF9D;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.update-btn:hover {
+  background: #00E08C;
+  transform: translateY(-1px);
+}
+
+.update-btn:active {
+  transform: translateY(0);
+}
+
+/* Animation d'entrée du modal */
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Media Query pour la responsivité */
+@media screen and (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full-width {
+    grid-column: 1;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .update-btn {
+    width: 100%;
+  }
+}

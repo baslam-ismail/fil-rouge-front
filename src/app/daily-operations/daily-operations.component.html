@@ -1,0 +1,120 @@
+<!-- daily-operations.component.html -->
+<div class="daily-operations-page">
+  <!-- En-tête -->
+  <header class="page-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1>Demandes d'opérations</h1>
+        <span class="subtitle">Gérez les opérations de vos clients</span>
+      </div>
+
+      <div class="actions-section">
+        <button class="refresh-btn" (click)="refreshData()">
+          <i class="refresh-icon">🔄</i>
+          Actualiser
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="page-content">
+    <!-- Section des filtres -->
+    <section class="filters-section" *ngIf="showFilters">
+      <div class="filters-container">
+        <!-- Filtre par statut -->
+        <div class="filter-group">
+          <label>Statut</label>
+          <select [(ngModel)]="statusFilter" (change)="applyFilters()">
+            <option value="">Tous</option>
+            <option *ngFor="let status of statusOptions" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Filtre par priorité -->
+        <div class="filter-group">
+          <label>Priorité</label>
+          <select [(ngModel)]="priorityFilter" (change)="applyFilters()">
+            <option value="">Toutes</option>
+            <option *ngFor="let priority of priorityOptions" [value]="priority">
+              {{ priority }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Filtre par catégorie -->
+        <div class="filter-group">
+          <label>Catégorie</label>
+          <select [(ngModel)]="categoryFilter" (change)="applyFilters()">
+            <option value="">Toutes</option>
+            <option *ngFor="let category of categoryOptions" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Sélection de la période -->
+        <div class="filter-group date-range">
+          <label>Période</label>
+          <div class="date-inputs">
+            <input
+              type="date"
+              [(ngModel)]="dateRange.start"
+              (change)="applyFilters()"
+            >
+            <span>à</span>
+            <input
+              type="date"
+              [(ngModel)]="dateRange.end"
+              (change)="applyFilters()"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="filters-actions">
+        <button class="reset-btn" (click)="resetFilters()">
+          Réinitialiser les filtres
+        </button>
+      </div>
+    </section>
+
+    <!-- Templates personnalisés pour le tableau -->
+    <ng-template #statusTemplate let-value>
+      <span class="status-badge" [ngClass]="'status-' + value.toLowerCase().replace(' ', '-')">
+        {{ value }}
+      </span>
+    </ng-template>
+
+    <ng-template #priorityTemplate let-value>
+      <span class="priority-badge" [ngClass]="'priority-' + value.toLowerCase().replace(' ', '-')">
+        {{ value }}
+      </span>
+    </ng-template>
+
+    <!-- Tableau des opérations -->
+    <section class="table-section">
+      <shared-table
+        [columns]="columns"
+        [data]="filteredOperations"
+        [options]="tableOptions"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+        (rowDblClick)="onRowDoubleClick($event)"
+      ></shared-table>
+    </section>
+  </main>
+</div>
+
+<!-- Modal de traitement d'opération -->
+<app-daily-operation-modal
+  *ngIf="selectedOperation"
+  [operation]="selectedOperation"
+  (close)="selectedOperation = null"
+  (update)="onOperationUpdate($event)"
+></app-daily-operation-modal>
+
+<!-- Notifications -->
+<app-notification-toast></app-notification-toast>

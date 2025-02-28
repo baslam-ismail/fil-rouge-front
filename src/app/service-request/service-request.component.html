@@ -1,0 +1,124 @@
+<div class="service-requests-page">
+  <!-- En-tête de la page -->
+  <header class="page-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1>Demandes de service</h1>
+        <span class="subtitle">Gérez les demandes de vos clients</span>
+      </div>
+
+      <div class="actions-section">
+        <button class="refresh-btn" (click)="refreshData()">
+          <i class="refresh-icon">🔄</i>
+          Actualiser
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="page-content">
+    <!-- Filtres et actions -->
+    <section class="filters-section" *ngIf="showFilters">
+
+      <div class="filters-container">
+        <!-- Filtre par statut -->
+        <div class="filter-group">
+          <label>Statut</label>
+          <select [(ngModel)]="statusFilter" (change)="applyFilters()">
+            <option value="">Tous</option>
+            <option *ngFor="let status of statusOptions" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Filtre par priorité -->
+        <div class="filter-group">
+          <label>Priorité</label>
+          <select [(ngModel)]="priorityFilter" (change)="applyFilters()">
+            <option value="">Toutes</option>
+            <option *ngFor="let priority of priorityOptions" [value]="priority">
+              {{ priority }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Filtre par catégorie -->
+        <div class="filter-group">
+          <label>Catégorie</label>
+          <select [(ngModel)]="categoryFilter" (change)="applyFilters()">
+            <option value="">Toutes</option>
+            <option *ngFor="let category of categoryOptions" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Période -->
+        <div class="filter-group">
+          <label for="date-range">Période</label>
+          <div class="date-inputs">
+            <input
+              type="date"
+              id="date-range"
+              [(ngModel)]="dateRange.start"
+              (change)="applyFilters()"
+              class="form-control"
+            >
+            <span>à</span>
+            <input
+              type="date"
+              [(ngModel)]="dateRange.end"
+              (change)="applyFilters()"
+              class="form-control"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="filters-actions">
+        <button class="reset-btn" (click)="resetFilters()">
+          Réinitialiser les filtres
+        </button>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <!-- Définition des templates personnalisés -->
+      <ng-template #statusTemplate let-value>
+        <span class="status-badge" [ngClass]="'status-' + value.toLowerCase().replace(' ', '-')">
+          {{ value }}
+        </span>
+      </ng-template>
+
+      <ng-template #priorityTemplate let-value>
+        <span class="priority-badge" [ngClass]="'priority-' + value.toLowerCase().replace(' ', '-')">
+          {{ value }}
+        </span>
+      </ng-template>
+
+      <!-- Table avec double-clic -->
+      <shared-table
+        [columns]="columns"
+        [data]="filteredRequests"
+        [options]="tableOptions"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+        (rowDblClick)="onRowDoubleClick($event)"
+      >
+      </shared-table>
+    </section>
+  </main>
+</div>
+
+<!-- Modal de traitement de demande -->
+<app-service-request-modal
+  *ngIf="selectedRequest"
+  [request]="selectedRequest"
+  (close)="selectedRequest = null"
+  (update)="onRequestUpdate($event)"
+></app-service-request-modal>
+
+<!-- Notifications -->
+<app-notification-toast></app-notification-toast>

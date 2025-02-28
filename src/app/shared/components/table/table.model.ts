@@ -1,8 +1,11 @@
+import {TemplateRef} from "@angular/core";
+
 export interface TableColumn {
   key: string;
   label: string;
   sortable?: boolean;
   visible?: boolean;
+  template?: TemplateRef<any>;
 }
 
 export interface TableOptions {

@@ -34,6 +34,13 @@ export class TableComponent implements OnInit {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
+  @Output() rowDblClick = new EventEmitter<any>();
+
+  onRowDoubleClick(row: any): void {
+    console.log('Double-click détecté sur:', row);
+    this.rowDblClick.emit(row);
+  }
+
   searchTerm = '';
   selectedRows = new Set<number>();
   showColumnSelector = false;

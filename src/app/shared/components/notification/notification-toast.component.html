@@ -1,0 +1,28 @@
+<div class="notifications-container">
+  @for (notification of activeNotifications; track notification.id) {
+    <div
+      class="notification-toast"
+      [ngClass]="notification.type"
+      (click)="removeNotification(notification.id)"
+    >
+      <div class="notification-content">
+        <span class="notification-icon">
+          @if (notification.type === 'success') {
+            ✓
+          } @else if (notification.type === 'error') {
+            ✕
+          } @else {
+            ℹ
+          }
+        </span>
+        <span class="notification-message">{{ notification.message }}</span>
+      </div>
+      <button
+        class="close-button"
+        (click)="$event.stopPropagation(); removeNotification(notification.id)"
+      >
+        ×
+      </button>
+    </div>
+  }
+</div>

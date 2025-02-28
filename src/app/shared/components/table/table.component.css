@@ -218,3 +218,22 @@ input[type="checkbox"] {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+tr {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+tr:hover {
+  background-color: rgba(0, 255, 157, 0.05);
+}
+
+tr.selected {
+  background-color: rgba(0, 255, 157, 0.1);
+}
+
+
+tr:active {
+  background-color: rgba(0, 255, 157, 0.15);
+}

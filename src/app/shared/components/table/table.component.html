@@ -85,7 +85,10 @@
     </thead>
     <tbody>
       @for (row of paginatedData; track row.id) {
-        <tr [class.selected]="selectedRows.has(row.id)">
+        <tr
+          [class.selected]="selectedRows.has(row.id)"
+          (dblclick)="onRowDoubleClick(row)"
+        >
           <td>
             <input
               type="checkbox"
@@ -94,12 +97,26 @@
             />
           </td>
           @for (col of visibleColumns; track col.key) {
-            <td>{{ row[col.key] }}</td>
+            <td>
+              @if (col.template) {
+                <ng-container
+                  [ngTemplateOutlet]="col.template"
+                  [ngTemplateOutletContext]="{ $implicit: row[col.key] }"
+                >
+                </ng-container>
+              } @else {
+                {{ row[col.key] }}
+              }
+            </td>
           }
           @if (options.actionsColumn) {
             <td class="actions">
-              <button (click)="edit.emit(row)" class="btn-icon">✏️</button>
-              <button (click)="delete.emit(row)" class="btn-icon">🗑️</button>
+              <button (click)="edit.emit(row)" class="btn-icon edit">
+                <i class="edit-icon">✏️</i>
+              </button>
+              <button (click)="delete.emit(row)" class="btn-icon delete">
+                <i class="delete-icon">🗑️</i>
+              </button>
             </td>
           }
         </tr>

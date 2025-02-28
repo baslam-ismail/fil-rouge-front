@@ -1,14 +1,16 @@
 .greeting {
-    margin-left: 350px; /* Décalé à droite pour éviter la sidebar */
+    /*margin-left: 350px; !* Décalé à droite pour éviter la sidebar *!*/
     margin-bottom: 10px; /* Espace entre le titre et la bannière */
     font-size: 1.2rem;
     font-weight: bold;
+    padding: 10px 0;
+
   }
-  
+
   .banner {
-    margin: 0 auto; /* Centré horizontalement */
-    margin-left: -30px; /* Ajuste le décalage à droite pour s'aligner avec la sidebar */
-    width: 100%; /* Augmente la largeur de la bannière */
+    margin: auto; /* Centré horizontalement */
+    /*margin-left: -30px; !* Ajuste le décalage à droite pour s'aligner avec la sidebar *!*/
+    width: 1000px; /* Augmente la largeur de la bannière */
     max-width: 900px; /* Définit une largeur maximale plus grande */
     background-color: #000; /* Fond noir */
     color: #fff; /* Texte blanc */
@@ -18,22 +20,22 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour donner un effet surélevé */
     position: relative;
   }
-  
-  
+
+
   .summary {
     display: flex;
     justify-content: space-around; /* Espacement uniforme entre les éléments */
     align-items: center; /* Centre verticalement */
     width: 100%; /* Prend toute la largeur */
   }
-  
+
   .summary-item {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centre le contenu */
     padding: 10px; /* Ajoute un espace intérieur */
   }
-  
+
   .icon {
     background-color: #e5ffe5; /* Fond vert pâle */
     color: #28a745; /* Texte vert */
@@ -46,20 +48,19 @@
     border-radius: 50%; /* Rond parfait */
     margin-bottom: 10px; /* Espacement sous l'icône */
   }
-  
+
   .info p {
     margin: 0; /* Supprime les marges par défaut */
   }
-  
+
   .number {
     font-size: 1.2rem; /* Taille du nombre */
     font-weight: bold; /* Texte en gras */
   }
-  
+
   .separator {
     width: 1px; /* Largeur fine pour la séparation */
     background-color: #444; /* Couleur de la séparation */
     height: 40px; /* Hauteur de la ligne */
     margin: 0 20px; /* Espace des deux côtés */
   }
-  
