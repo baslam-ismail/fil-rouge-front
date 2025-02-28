@@ -40,12 +40,11 @@ export const routes: Routes = [
     { path: 'dashboard-customer', component: DashboardCustomerComponent },
     { path: 'create-account', component: CreateAccountComponent },
     { path: 'chatbot', component: ChatbotComponent},
-    { path: 'service-requests', component: ServiceRequestComponent }
+    { path: 'service-requests', component: ServiceRequestComponent },
     { path: 'customer-portfolio', component: CustomerPortfolioComponent },
     { path: 'appointments', component: AppointmentsComponent },
     { path: 'bank-operations', component: BankOperationsComponent },
     { path: 'help-bank-advisor', component: HelpBankAdvisorComponent },
-    { path: 'profil', component: ProfilComponent },
     { path: 'chatbot', component: ChatbotComponent },
     { path: 'operations-form', component: OperationsFormComponent },
     { path: 'requests-form', component: RequestsFormComponent },
