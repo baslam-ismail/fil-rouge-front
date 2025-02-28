@@ -36,7 +36,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatMenuModule,
-    MatTableExporterModule,
+    //    MatTableExporterModule,
     MatDialogModule
   ],
   exports: [

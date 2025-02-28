@@ -17,7 +17,6 @@ import { Router } from '@angular/router';
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.css']
 })
-<<<<<<< HEAD
 export class CreateAccountComponent implements OnInit {
   users: any[] = []; // Liste des utilisateurs
   
@@ -64,17 +63,5 @@ export class CreateAccountComponent implements OnInit {
     } else {
       alert('Veuillez remplir tous les champs correctement.');
     }
-=======
-
-export class CreateAccountComponent {
-  constructor(private router: Router) {}
-
-  onSubmit(form: any) {
-    // Logique de soumission du formulaire ici
-    console.log('Form submitted', form);
-
-    // Redirection vers la page "customer portfolio"
-    this.router.navigate(['/customer-portfolio']);
->>>>>>> 2bd853dc080c33d40ab4b2ed35b93adcd1ac853e
   }
 }
