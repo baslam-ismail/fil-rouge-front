@@ -11,6 +11,8 @@ import {OperationCategory, OperationPriority, OperationStatus} from "./daily-ope
 import {NotificationService} from "../shared/services/notification.service";
 import {DailyOperationModalComponent} from "./daily-operations-modal/daily-operations-modal.component";
 import {NotificationToastComponent} from "../shared/components/notification/notification-toast.component";
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { BannerComponent } from '../banner/banner.component';
 
 interface DateRange {
   start: string;
@@ -27,7 +29,9 @@ interface DateRange {
     FormsModule,
     TableComponent,
     DailyOperationModalComponent,
-    NotificationToastComponent
+    NotificationToastComponent,
+    SidebarComponent,
+    BannerComponent
   ]
 })
 export class DailyOperationsComponent implements OnInit, OnDestroy {

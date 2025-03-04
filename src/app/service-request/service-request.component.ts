@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import {NotificationToastComponent} from "../shared/components/notification/notification-toast.component";
 import {NotificationService} from "../shared/services/notification.service";
-
+import { BannerComponent } from '../banner/banner.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-service-requests',
@@ -22,7 +23,9 @@ import {NotificationService} from "../shared/services/notification.service";
     FormsModule,
     TableComponent,
     ServiceRequestModalComponent,
-    NotificationToastComponent
+    NotificationToastComponent,
+    SidebarComponent,
+    BannerComponent
   ]
 })
 export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit {

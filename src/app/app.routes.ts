@@ -1,6 +1,6 @@
 // app.routes.ts
+import { NgModule } from "@angular/core";
 import {RouterModule, Routes} from '@angular/router';
-import { BankOperationsComponent } from './bank-operations/bank-operations.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HelpBankAdvisorComponent } from './help-bank-advisor/help-bank-advisor.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
@@ -8,9 +8,8 @@ import { CustomerPortfolioComponent } from './customer-portfolio/customer-portfo
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
-import {ServiceRequestComponent} from "./service-request/service-request.component";
-import {DailyOperationsComponent} from "./daily-operations/daily-operations.component";
-import {NgModule} from "@angular/core";
+import { ServiceRequestComponent } from "./service-request/service-request.component";
+import { DailyOperationsComponent } from "./daily-operations/daily-operations.component";
 import { CalendarWidgetComponent } from './dashboard/calendar-widget/calendar-widget.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AppointmentsFormComponent } from './appointments/appointments-form/appointments-form.component';
@@ -18,7 +17,6 @@ import { LoginComponent } from './login/login.component';
 import { CreateAdvisorComponent } from './create-advisor/create-advisor.component';
 import { ListAdvisorsComponent } from './list-advisors/list-advisors.component';
 import { ClientManagementComponent } from './client-management/client-management.component';
-
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
 import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component';
 import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
@@ -33,7 +31,6 @@ export const routes: Routes = [
     { path: 'create-account', component: CreateAccountComponent},
     { path: 'customer-portfolio', component: CustomerPortfolioComponent},
     { path: 'appointments', component: AppointmentsComponent},
-    { path: 'bank-operations', component: DailyOperationsComponent},
     { path: 'help-bank-advisor', component: HelpBankAdvisorComponent},
     { path: 'profil', component: ProfilComponent},
     { path: 'dashboard', component: DashboardComponent },
@@ -43,7 +40,7 @@ export const routes: Routes = [
     { path: 'service-requests', component: ServiceRequestComponent },
     { path: 'customer-portfolio', component: CustomerPortfolioComponent },
     { path: 'appointments', component: AppointmentsComponent },
-    { path: 'bank-operations', component: BankOperationsComponent },
+    { path: 'daily-operation', component: DailyOperationsComponent },
     { path: 'help-bank-advisor', component: HelpBankAdvisorComponent },
     { path: 'chatbot', component: ChatbotComponent },
     { path: 'operations-form', component: OperationsFormComponent },
