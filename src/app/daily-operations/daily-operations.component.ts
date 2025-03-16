@@ -59,8 +59,8 @@ export class DailyOperationsComponent implements OnInit, OnDestroy {
   // Configuration du tableau
   columns: OperationColumn[] = [
     { key: 'type', label: 'Motif', sortable: true },
-    { key: 'clientName', label: 'Nom client', sortable: true },
-    { key: 'clientNumber', label: 'Numéro client', sortable: true },
+    { key: 'clientName', label: 'Client', sortable: true },
+    { key: 'clientNumber', label: 'Téléphone', sortable: true },
     {
       key: 'priority',
       label: 'Priorité',

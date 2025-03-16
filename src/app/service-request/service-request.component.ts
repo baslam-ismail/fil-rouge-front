@@ -4,7 +4,7 @@ import { TableComponent } from '../shared/components/table/table.component';
 import { ServiceRequestModalComponent } from './service-request-modal/service-request-modal.component';
 import { ServiceRequestService } from './service-request.service';
 import { TableOptions } from '../shared/components/table/table.model';
-import {ServiceRequest,RequestUpdateEvent,ServiceRequestColumn, DateRange  } from './service-request.model';
+import {ServiceRequest,ServiceRequestColumn, DateRange  } from './service-request.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -55,9 +55,9 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
 
   // Variables pour le tableau
   columns: ServiceRequestColumn[] = [
-    { key: 'title', label: 'Titre', sortable: true },
-    { key: 'clientName', label: 'Nom client', sortable: true },
-    { key: 'clientNumber', label: 'Numéro client', sortable: true },
+    { key: 'title', label: 'Motif', sortable: true },
+    { key: 'clientName', label: 'Client', sortable: true },
+    { key: 'clientNumber', label: 'Téléphone', sortable: true },
     { key: 'priority', label: 'Priorité', sortable: true },
     { key: 'category', label: 'Catégorie', sortable: true },
     { key: 'date', label: 'Date', sortable: true },

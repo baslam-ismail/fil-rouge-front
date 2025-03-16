@@ -7,8 +7,8 @@
     <p>Date sélectionnée : {{ selectedDate | date: 'EEEE dd MMMM YYYY' }}</p>
     <form class="appointment-form" (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="form-group">
-        <label for="title">Titre</label>
-        <input type="text" id="title" name="title" ngModel placeholder="Entrez le titre" required>
+        <label for="title">Motif</label>
+        <input type="text" id="title" name="title" ngModel placeholder="Entrez le motif" required>
       </div>
       
       <div class="form-group">
@@ -43,11 +43,6 @@
           <option value="15:00-16:00">15:00 - 16:00</option>
           <option value="16:00-17:00">16:00 - 17:00</option>
         </select>
-      </div>
-
-      <div class="form-group">
-        <label for="reason">Motif de rendez-vous</label>
-        <textarea id="reason" name="reason" ngModel placeholder="Entrez le motif de rendez-vous" required></textarea>
       </div>
 
       <div class="form-group">
