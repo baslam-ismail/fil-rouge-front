@@ -11,20 +11,19 @@
   text-align: center;
 }
 
-/* Titre */
+
 h2 {
   font-size: 2rem;
   margin-bottom: 10px;
 }
 
-/* Date sélectionnée */
+
 .date-selected {
   font-size: 1rem;
   color: #ccc;
   margin-bottom: 20px;
 }
 
-/* Style du formulaire */
 .account-form {
   display: flex;
   flex-direction: column;
@@ -32,22 +31,20 @@ h2 {
   text-align: left;
 }
 
-/* Style des groupes de champs */
 .form-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  margin-bottom: 10px;
 }
 
-/* Labels */
 label {
   font-weight: bold;
   margin-bottom: 5px;
   color: #fff;
 }
 
-/* Champs de saisie */
 input, textarea, select {
   width: 100%;
   padding: 12px;
@@ -58,23 +55,21 @@ input, textarea, select {
   font-size: 1rem;
 }
 
-/* Effet focus */
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
-/* Champ texte spécifique */
+
 textarea {
   resize: none;
   height: 80px;
 }
 
-/* Bouton de validation */
 .submit-btn {
   padding: 12px;
-  background-color: #007bff;
+  background-color: #00ff99;
   color: white;
   border: none;
   border-radius: 8px;
@@ -85,10 +80,9 @@ textarea {
 }
 
 .submit-btn:hover {
-  background-color: #0056b3;
+  background-color: #24d48e;
 }
 
-/* Responsive pour mobiles */
 @media (max-width: 600px) {
   .create-appointment-container {
       width: 90%;
@@ -102,9 +96,18 @@ textarea {
 }
 
 .main-content {
-  margin-left: 270px; /* Espace pour la sidebar */
+  margin-left: 270px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.form-group.priority-group {
+  margin-bottom: 20px; /* Ajoute un espace entre le champ "Priorité" et le bouton */
 }

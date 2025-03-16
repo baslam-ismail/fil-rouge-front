@@ -5,30 +5,45 @@
   <div class="operations-container">
     <h2>Demande d'Opération Quotidienne</h2>
 
-    <form (submit)="submitRequest()">
+    <form [formGroup]="operationsForm" (ngSubmit)="submitRequest()">
       <div class="form-group">
         <label for="accountNumber">Numéro de Compte :</label>
-        <input id="accountNumber" [(ngModel)]="operationData.accountNumber" type= "number" name="accountNumber" required>
+        <input id="accountNumber" formControlName="accountNumber" required placeholder="Indiquez votre compte"/>
+        <div *ngIf="operationsForm.get('accountNumber')?.invalid && operationsForm.get('accountNumber')?.touched">
+          <small class="error-message" *ngIf="operationsForm.get('accountNumber')?.errors?.['required']">Le numéro de compte est requis.</small>
+          <small class="error-message" *ngIf="operationsForm.get('accountNumber')?.errors?.['pattern']">Le numéro de compte doit contenir uniquement des chiffres.</small>
+        </div>
       </div>
       
       <div class="form-group">
-        <label for="operationType">Type d'Opération :</label>
-        <select id="operationType" [(ngModel)]="operationData.type" name="operationType" required>
+        <label for="operationType">Type d'opération :</label>
+        <select id="operationType" formControlName="type" name="type" required> 
           <option value="" disabled selected>Choisissez une opération</option>
           <option value="contestation">Prélèvement</option>
           <option value="virement">Virement</option>
           <option value="autre">Carte Bleue</option>
         </select>
+        <div *ngIf="operationsForm.get('type')?.invalid && operationsForm.get('type')?.touched">
+          <small class="error-message" *ngIf="operationsForm.get('type')?.errors?.['required']">Le type est requis.</small>
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="amount">Titre :</label>
-        <input id="amount" [(ngModel)]="operationData.title" name="title" required>
+        <label for="title">Objet de la demande :</label>
+        <input id="title" formControlName="title" name="title" required placeholder="Indiquez l'objet" />
+        <div *ngIf="operationsForm.get('title')?.invalid && operationsForm.get('title')?.touched">
+          <small class="error-message" *ngIf="operationsForm.get('title')?.errors?.['required']">Le titre est requis.</small>
+          <small class="error-message" *ngIf="operationsForm.get('title')?.errors?.['minlength']">Le titre doit avoir au moins 7 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="description">Description :</label>
-        <textarea id="description" [(ngModel)]="operationData.description" name="description" required></textarea>
+        <textarea id="description" formControlName="description" name="description" required placeholder="Décrivez votre demande"></textarea>
+        <div *ngIf="operationsForm.get('description')?.invalid && operationsForm.get('description')?.touched">
+          <small class="error-message" *ngIf="operationsForm.get('description')?.errors?.['required']">La description est requise.</small>
+          <small class="error-message" *ngIf="operationsForm.get('description')?.errors?.['maxlength']">La description ne doit pas dépasser 250 caractères.</small>
+        </div>
       </div>
 
       <button type="submit" class="submit-btn">Envoyer la Demande</button>

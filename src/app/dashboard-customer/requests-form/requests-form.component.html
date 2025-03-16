@@ -5,30 +5,45 @@
   <div class="requests-container">
     <h2>Demande de Service</h2>
 
-    <form (submit)="submitRequest()">
+    <form [formGroup]="requestsForm" (submit)="submitRequest()">
       <div class="form-group">
         <label for="accountNumber">Numéro de Compte :</label>
-        <input id="accountNumber" [(ngModel)]="requestData.accountNumber" type= "number" name="accountNumber" required>
+        <input id="accountNumber" formControlName="accountNumber" placeholder="Indiquez votre compte"/>
+        <div *ngIf="requestsForm.get('accountNumber')?.invalid && requestsForm.get('accountNumber')?.touched">
+          <small class="error-message" *ngIf="requestsForm.get('accountNumber')?.errors?.['required']">Le numéro de compte est requis.</small>
+          <small class="error-message" *ngIf="requestsForm.get('accountNumber')?.errors?.['pattern']">Le numéro de compte doit contenir uniquement des chiffres.</small>
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="subject">Objet :</label>
-        <select id="subject" [(ngModel)]="requestData.subject" name="subject" required>
-          <option value="" disabled selected>Choisissez un objet</option>
+        <label for="subject">Type de service :</label>
+        <select id="subject" formControlName="subject" name="subject" required>
+          <option value="" disabled selected>Choisissez un service</option>
           <option value="ouverture">Compte épargne</option>
           <option value="pret">Prêt</option>
           <option value="autre">Assurance</option>
         </select>
+        <div *ngIf="requestsForm.get('subject')?.invalid && requestsForm.get('subject')?.touched">
+          <small class="error-message" *ngIf="requestsForm.get('subject')?.errors?.['required']">Le type de service est requis.</small>
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="amount">Titre :</label>
-        <input id="amount" [(ngModel)]="requestData.title" name="title" required>
+        <label for="title">Objet de la demande :</label>
+        <input id="title" formControlName="title" name="title" required placeholder="Indiquez l'objet" /> 
+        <div *ngIf="requestsForm.get('title')?.invalid && requestsForm.get('title')?.touched">
+          <small class="error-message" *ngIf="requestsForm.get('title')?.errors?.['required']">Le titre est requis.</small>
+          <small class="error-message" *ngIf="requestsForm.get('title')?.errors?.['minlength']">Le titre doit avoir au moins 7 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="description">Description :</label>
-        <textarea id="description" [(ngModel)]="requestData.description" name="description" required></textarea>
+        <textarea id="description" formControlName="description" name="description" required placeholder="Décrivez votre demande"></textarea>
+        <div *ngIf="requestsForm.get('description')?.invalid && requestsForm.get('description')?.touched">
+          <small class="error-message" *ngIf="requestsForm.get('description')?.errors?.['required']">La description est requise.</small>
+          <small class="error-message" *ngIf="requestsForm.get('description')?.errors?.['maxlength']">La description ne doit pas dépasser 250 caractères.</small>
+        </div>
       </div>
 
       <button type="submit" class="submit-btn">Envoyer la Demande</button>

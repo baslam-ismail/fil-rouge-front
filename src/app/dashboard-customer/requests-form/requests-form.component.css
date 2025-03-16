@@ -48,7 +48,7 @@ input, select, textarea {
 
 .submit-btn {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #00ff99;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -58,5 +58,10 @@ input, select, textarea {
 }
 
 .submit-btn:hover {
-    background-color: #0056b3;
+    background-color: #24d48e;
 }
+
+.error-message {
+    color: red;
+    font-weight: bold;
+  }

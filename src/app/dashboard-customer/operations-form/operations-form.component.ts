@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';  // ✅ Import pour éviter l'erreur `ngModel`
-import { SidebarComponent } from '../../sidebar/sidebar.component';  // ✅ Vérifie ce chemin
-import { BannerComponent } from '../../banner/banner.component';  // ✅ Vérifie ce chemin
+import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';  
+import { SidebarComponent } from '../../sidebar/sidebar.component';  
+import { BannerComponent } from '../../banner/banner.component';  
 
 @Component({
   selector: 'app-operations-form',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule, // ✅ Correction de l'erreur `ngModel`
+    FormsModule, 
+    ReactiveFormsModule,
     SidebarComponent,
     BannerComponent
   ],
@@ -17,19 +18,22 @@ import { BannerComponent } from '../../banner/banner.component';  // ✅ Vérifi
   styleUrls: ['./operations-form.component.css']
 })
 export class OperationsFormComponent {
-  operationData = {
-    accountNumber: '',
-    type: '',
-    title: '',
-    description: ''
-    
-  };
+  operationsForm = this.fb.group({
+    accountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    type: ['', Validators.required],
+    title: ['', [Validators.required, Validators.minLength(7)]],
+    description: ['', [Validators.required, Validators.maxLength(250)]]
+  });
+
+  constructor(private fb: FormBuilder) {}
 
   submitRequest() {
-    console.log("Demande envoyée :", this.operationData);
-    alert("Votre demande d'opération quotidienne a bien été envoyée !");
-    
-    // ✅ Réinitialisation du formulaire après soumission
-    this.operationData = { accountNumber:'', type: '', title: '', description: '' };
+    if (this.operationsForm.valid) {
+      console.log("Demande envoyée :", this.operationsForm.value);
+      alert("Votre demande d'opération quotidienne a bien été envoyée !");
+      this.operationsForm.reset();
+    } else {
+      alert("Veuillez remplir correctement le formulaire.");
+    }
   }
 }

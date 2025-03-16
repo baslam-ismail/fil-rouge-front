@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // ✅ Gestion de `ngModel`
-import { SidebarComponent } from '../../sidebar/sidebar.component'; // ✅ Correction du chemin
-import { BannerComponent } from '../../banner/banner.component'; // ✅ Correction du chemin
-import { title } from 'node:process';
+import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms'; 
+import { SidebarComponent } from '../../sidebar/sidebar.component'; 
+import { BannerComponent } from '../../banner/banner.component';
+
 
 @Component({
   selector: 'app-requests-form',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule, // ✅ Permet l'utilisation de `ngModel`
+    FormsModule, 
+    ReactiveFormsModule,
     SidebarComponent,
     BannerComponent
   ],
@@ -18,16 +19,22 @@ import { title } from 'node:process';
   styleUrls: ['./requests-form.component.css']
 })
 export class RequestsFormComponent {
-  requestData = {
-    accountNumber: '',
-    subject: '',
-    title: '',
-    description: ''
-  };
+  requestsForm = this.fb.group({
+    accountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    subject: ['', Validators.required],
+    title: ['', [Validators.required, Validators.minLength(7)]],
+    description: ['', [Validators.required, Validators.maxLength(250)]]
+  });
+
+  constructor(private fb: FormBuilder) {}
 
   submitRequest() {
-    console.log("Demande envoyée :", this.requestData);
-    alert("Votre demande de service a bien été envoyée !");
-    this.requestData = { accountNumber: '', subject: '', title:'', description: '' };
+    if (this.requestsForm.valid) {
+      console.log("Demande envoyée :", this.requestsForm.value);
+      alert("Votre demande de service a bien été envoyée !");
+      this.requestsForm.reset();
+    } else {
+      alert("Veuillez remplir correctement le formulaire.");
+    }
   }
 }

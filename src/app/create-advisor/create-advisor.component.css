@@ -40,7 +40,7 @@ input {
 
 .submit-btn {
     padding: 12px;
-    background-color: #007bff;
+    background-color: #00ff99;
     color: white;
     border: none;
     border-radius: 8px;
@@ -51,7 +51,7 @@ input {
 }
 
 .submit-btn:hover {
-    background-color: #0056b3;
+    background-color: #24d48e;
 }
 .main-content {
     margin-left: 270px; /* Espace pour la sidebar */

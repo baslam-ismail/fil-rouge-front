@@ -5,35 +5,55 @@
   <div class="create-appointment-container">
     <h2>Créer un rendez-vous</h2>
     <p>Date sélectionnée : {{ selectedDate | date: 'EEEE dd MMMM YYYY' }}</p>
-    <form class="appointment-form" (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <form [formGroup]="appointmentsForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="title">Motif</label>
-        <input type="text" id="title" name="title" ngModel placeholder="Entrez le motif" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="firstName">Prénom</label>
-        <input type="text" id="firstName" name="firstName" ngModel placeholder="Entrez le prénom" required>
+        <label for="reason">Motif</label>
+        <input type="text" id="reason" name="reason" formControlName="reason" placeholder="Entrez le motif" />
+        <div *ngIf="appointmentsForm.get('reason')?.invalid && appointmentsForm.get('reason')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('reason')?.errors?.['required']">Le motif est requis.</small>
+          <small class="error-message" *ngIf="appointmentsForm.get('reason')?.errors?.['minlength']">Le motif doit avoir au moins 7 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="lastName">Nom</label>
-        <input type="text" id="lastName" name="lastName" ngModel placeholder="Entrez le nom" required>
+        <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Entrez le nom" />
+        <div *ngIf="appointmentsForm.get('lastName')?.invalid && appointmentsForm.get('lastName')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('lastName')?.errors?.['required']">Le nom est requis.</small>
+          <small class="error-message" *ngIf="appointmentsForm.get('lastName')?.errors?.['minlength']">Le nom doit avoir au moins 3 caractères.</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="firstName">Prénom</label>
+        <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Entrez le prénom" />
+        <div *ngIf="appointmentsForm.get('firstName')?.invalid && appointmentsForm.get('firstName')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('firstName')?.errors?.['required']">Le prénom est requis.</small>
+          <small class="error-message" *ngIf="appointmentsForm.get('firstName')?.errors?.['minlength']">Le prénom doit avoir au moins 3 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" ngModel placeholder="Entrez l'email" required>
+        <input type="email" id="email" name="email" formControlName="email" placeholder="Entrez l'email" />
+        <div *ngIf="appointmentsForm.get('email')?.invalid && appointmentsForm.get('email')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('email')?.errors?.['required']">L'email est requis.</small>
+          <small class="error-message" *ngIf="appointmentsForm.get('email')?.errors?.['email']">L'email doit être valide.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="phone">Numéro de téléphone</label>
-        <input type="tel" id="phone" name="phone" ngModel placeholder="Entrez le numéro de téléphone" required>
+        <input type="tel" id="phone" name="phone" formControlName="phone" placeholder="Entrez le numéro de téléphone" />
+        <div *ngIf="appointmentsForm.get('phone')?.invalid && appointmentsForm.get('phone')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('phone')?.errors?.['required']">Le téléphone est requis.</small>
+          <small class="error-message" *ngIf="appointmentsForm.get('phone')?.errors?.['pattern']">Le téléphone doit contenir 10 chiffres.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="timeSlot">Créneau horaire</label>
-        <select id="timeSlot" name="timeSlot" ngModel required>
+        <select id="timeSlot" name="timeSlot" formControlName="timeSlot" required>
           <option value="" disabled selected>Choisissez un créneau</option>
           <option value="09:00-10:00">09:00 - 10:00</option>
           <option value="10:00-11:00">10:00 - 11:00</option>
@@ -43,28 +63,37 @@
           <option value="15:00-16:00">15:00 - 16:00</option>
           <option value="16:00-17:00">16:00 - 17:00</option>
         </select>
+        <div *ngIf="appointmentsForm.get('timeSlot')?.invalid && appointmentsForm.get('timeSlot')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('timeSlot')?.errors?.['required']">Le créneau horaire est requis.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="location">Lieu</label>
-        <select id="location" name="location" ngModel required>
+        <select id="location" name="location" formControlName="location" required>
           <option value="" disabled selected>Choisissez un lieu</option>
           <option value="agence">En agence</option>
           <option value="visio">En visio</option>
         </select>
+        <div *ngIf="appointmentsForm.get('location')?.invalid && appointmentsForm.get('location')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('location')?.errors?.['required']">Le lieu est requis.</small>
+        </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group priority-group">
         <label for="priority">Priorité</label>
-        <select id="priority" name="priority" ngModel required>
+        <select id="priority" name="priority" formControlName="priority" required>
           <option value="" disabled selected>Choisissez une priorité</option>
           <option value="basse">Basse</option>
           <option value="moyenne">Moyenne</option>
           <option value="haute">Haute</option>
         </select>
+        <div *ngIf="appointmentsForm.get('priority')?.invalid && appointmentsForm.get('priority')?.touched">
+          <small class="error-message" *ngIf="appointmentsForm.get('priority')?.errors?.['required']">La priorité est requise.</small>
+        </div>
       </div>
 
-      <button type="submit" class="submit-btn">Valider</button>
+      <button type="submit" class="submit-btn">Créer le rendez-vous</button>
     </form>
   </div>
 </div>
