@@ -2,39 +2,55 @@
 <div class="main-content">
   <app-banner></app-banner>
 
-  <!-- Tableau unique pour le profil et la modification du mot de passe -->
+  <!-- Bloc principal pour la modification du profil -->
   <div class="profile-container">
-    <h2>Modification du profil et mot de passe</h2>
-    <form>
+    <h2>Modification du profil</h2>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmitProfile()">
       <table>
         <tr>
           <td><label>Nom</label></td>
-          <td><input type="text" value="MOISANT"></td>
+          <td><input type="text" formControlName="lastname" placeholder="Entrez le nom" /></td>
           <td><label>Prénom</label></td>
-          <td><input type="text" value="Evano"></td>
+          <td><input type="text" formControlName="firstname" placeholder="Entrez le prénom" /></td>
         </tr>
         <tr>
           <td><label>Numéro de téléphone</label></td>
-          <td><input type="text" value="0606060606"></td>
+          <td><input type="text" formControlName="phone" placeholder="Entrez le numéro de téléphone" /></td>
           <td><label>Email</label></td>
-          <td><input type="email" value="evano@commercial-malsi.fr"></td>
+          <td><input type="email" formControlName="email" placeholder="Entrez l'email" /></td>
         </tr>
         <tr>
           <td><label>Adresse postale</label></td>
-          <td colspan="3"><input type="text" value="10 rue Albert Cachin, 75006, Paris"></td>
+          <td colspan="3"><input type="text" formControlName="address" placeholder="Entrez l'adresse postale" /></td>
         </tr>
         <tr>
           <td colspan="4"><button type="submit" class="btn-save">Modifier le profil</button></td>
         </tr>
+      </table>
+    </form>
+  </div>
+
+  <!-- Bloc pour la modification du mot de passe -->
+  <div class="profile-container">
+    <h2>Modification du mot de passe</h2>
+    <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
+      <table>
         <tr>
           <td><label>Ancien mot de passe</label></td>
-          <td><input type="password" value="LaROchelle99@@"></td>
+          <td><input type="password" formControlName="oldPassword" placeholder="Entrez l'ancien mot de passe" /></td>
+        </tr>
+        <tr>
           <td><label>Nouveau mot de passe</label></td>
-          <td><input type="password"></td>
+          <td><input type="password" formControlName="newPassword" placeholder="Entrez le nouveau mot de passe" /></td>
+          <div *ngIf="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched">
+            <small class="error-message" *ngIf="passwordForm.get('newPassword')?.errors?.['required']">Le mot de passe est requis.</small>
+            <small class="error-message" *ngIf="passwordForm.get('newPassword')?.errors?.['minlength']">Le mot de passe doit contenir au moins 8 caractères.</small>
+            <small class="error-message" *ngIf="passwordForm.get('newPassword')?.errors?.['pattern']">Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+          </div>
         </tr>
         <tr>
           <td><label>Confirmer mot de passe</label></td>
-          <td colspan="3"><input type="password"></td>
+          <td colspan="3"><input type="password" formControlName="confirmPassword" placeholder="Confirmez le nouveau mot de passe" /></td>
         </tr>
         <tr>
           <td colspan="4"><button type="submit" class="btn-save">Modifier le mot de passe</button></td>

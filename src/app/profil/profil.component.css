@@ -101,4 +101,9 @@
     background: transparent;
     z-index: 1000;
   }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
   
