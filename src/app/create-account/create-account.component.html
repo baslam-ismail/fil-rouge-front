@@ -5,30 +5,50 @@
   <!-- Bloc principal pour la création de compte client -->
   <div class="create-account-container">
     <h2>Créer un compte client</h2>
-    <form class="account-form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="lastname">Nom</label>
-        <input type="text" id="lastname" placeholder="Entrez le nom" />
+        <input type="text" id="lastname" formControlName="lastname" placeholder="Entrez le nom" />
+        <div *ngIf="accountForm.get('lastname')?.invalid && accountForm.get('lastname')?.touched">
+          <small class="error-message" *ngIf="accountForm.get('lastname')?.errors?.['required']">Le nom est requis.</small>
+          <small class="error-message" *ngIf="accountForm.get('lastname')?.errors?.['minlength']">Le nom doit avoir au moins 3 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="firstname">Prénom</label>
-        <input type="text" id="firstname" placeholder="Entrez le prénom" />
+        <input type="text" id="firstname" formControlName="firstname" placeholder="Entrez le prénom" />
+        <div *ngIf="accountForm.get('firstname')?.invalid && accountForm.get('firstname')?.touched">
+          <small class="error-message" *ngIf="accountForm.get('firstname')?.errors?.['required']">Le prénom est requis.</small>
+          <small class="error-message" *ngIf="accountForm.get('firstname')?.errors?.['minlength']">Le prénom doit avoir au moins 3 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="phone">Numéro de téléphone</label>
-        <input type="text" id="phone" placeholder="Entrez le numéro de téléphone" />
+        <input type="text" id="phone" formControlName="phone" placeholder="Entrez le numéro de téléphone" />
+        <div *ngIf="accountForm.get('phone')?.invalid && accountForm.get('phone')?.touched">
+          <small class="error-message" *ngIf="accountForm.get('phone')?.errors?.['required']">Le téléphone est requis.</small>
+          <small class="error-message" *ngIf="accountForm.get('phone')?.errors?.['pattern']">Le téléphone doit contenir 10 chiffres.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Entrez l'email" />
+        <input type="email" id="email" formControlName="email" placeholder="Entrez l'email" />
+        <div *ngIf="accountForm.get('email')?.invalid && accountForm.get('email')?.touched">
+          <small class="error-message" *ngIf="accountForm.get('email')?.errors?.['required']">L'email est requis.</small>
+          <small class="error-message" *ngIf="accountForm.get('email')?.errors?.['email']">L'email doit être valide.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="address">Adresse postale</label>
-        <input type="text" id="address" placeholder="Entrez l'adresse postale" />
+        <input type="text" id="address" formControlName="address" placeholder="Entrez l'adresse postale" />
+        <div *ngIf="accountForm.get('address')?.invalid && accountForm.get('address')?.touched">
+          <small class="error-message" *ngIf="accountForm.get('address')?.errors?.['required']">L'adresse est requise.</small>
+          <small class="error-message" *ngIf="accountForm.get('address')?.errors?.['pattern']">L'adresse doit être valide.</small>
+        </div>
       </div>
 
       <button type="submit" class="submit-btn">Créer le compte</button>

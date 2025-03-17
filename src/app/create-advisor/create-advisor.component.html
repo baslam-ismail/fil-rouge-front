@@ -5,29 +5,41 @@
   <div class="create-advisor-container">
     <h2>Créer un compte conseiller</h2>
 
-    <form class="advisor-form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="advisorForm"  (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="lastname">Nom</label>
-        <input type="text" id="lastname" [(ngModel)]="advisorData.lastname" name="lastname" placeholder="Entrez le nom"
-          required />
+        <input type="text" id="lastname"  name="lastname" formControlName="lastname" placeholder="Entrez le nom" />
+        <div *ngIf="advisorForm.get('lastname')?.invalid && advisorForm.get('lastname')?.touched">
+          <small class="error-message" *ngIf="advisorForm.get('lastname')?.errors?.['required']">Le nom est requis.</small>
+          <small class="error-message" *ngIf="advisorForm.get('lastname')?.errors?.['minlength']">Le nom doit avoir au moins 3 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="firstname">Prénom</label>
-        <input type="text" id="firstname" [(ngModel)]="advisorData.firstname" name="firstname"
-          placeholder="Entrez le prénom" required />
+        <input type="text" id="firstname" name="firstname"formControlName="firstname" placeholder="Entrez le prénom" />
+        <div *ngIf="advisorForm.get('firstname')?.invalid && advisorForm.get('firstname')?.touched">
+          <small class="error-message" *ngIf="advisorForm.get('firstname')?.errors?.['required']">Le prénom est requis.</small>
+          <small class="error-message" *ngIf="advisorForm.get('firstname')?.errors?.['minlength']">Le prénom doit avoir au moins 3 caractères.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="advisorData.email" name="email" placeholder="Entrez l'email"
-          required />
+        <input type="email" id="email" formControlName="email" placeholder="Entrez l'email" />
+        <div *ngIf="advisorForm.get('email')?.invalid && advisorForm.get('email')?.touched">
+          <small class="error-message" *ngIf="advisorForm.get('email')?.errors?.['required']">L'email est requis.</small>
+          <small class="error-message" *ngIf="advisorForm.get('email')?.errors?.['email']">L'email doit être valide.</small>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="phone">Numéro de téléphone</label>
-        <input type="text" id="phone" [(ngModel)]="advisorData.phone" name="phone"
-          placeholder="Entrez le numéro de téléphone" required />
+        <input type="text" id="phone" [formControlName="phone" placeholder="Entrez le numéro de téléphone" />
+        <div *ngIf="advisorForm.get('phone')?.invalid && advisorForm.get('phone')?.touched">
+          <small class="error-message" *ngIf="advisorForm.get('phone')?.errors?.['required']">Le téléphone est requis.</small>
+          <small class="error-message" *ngIf="advisorForm.get('phone')?.errors?.['pattern']">Le téléphone doit contenir 10 chiffres.</small>
+        </div>
       </div>
 
       <button type="submit" class="submit-btn">Enregistrer</button>

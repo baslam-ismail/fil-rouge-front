@@ -129,3 +129,8 @@ input:focus {
   color: #666;
   margin-top: 15px;
 }
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}

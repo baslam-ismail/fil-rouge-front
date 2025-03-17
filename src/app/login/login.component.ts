@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true, // Vérifie que c'est bien un composant standalone
-  imports: [CommonModule, FormsModule, ReactiveFormsModule], // ✅ Ajout des modules nécessaires
+  standalone: true, 
+  imports: [CommonModule, FormsModule, ReactiveFormsModule], 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -17,7 +17,11 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')
+      ]]
     });
   }
 

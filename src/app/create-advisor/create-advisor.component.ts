@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { BannerComponent } from "../banner/banner.component";
@@ -8,22 +8,22 @@ import { BannerComponent } from "../banner/banner.component";
 @Component({
   selector: 'app-create-advisor',
   standalone: true,
-  imports: [CommonModule, FormsModule, SidebarComponent, BannerComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent, BannerComponent],
   templateUrl: './create-advisor.component.html',
   styleUrls: ['./create-advisor.component.css']
 })
 export class CreateAdvisorComponent implements OnInit {
   advisors: any[] = []; // Liste des conseillers
   
-  advisorData = {
-    lastname: '',
-    firstname: '',
-    phone: '',
-    email: '',
-    role: 'conseiller' // Toujours conseiller
-  };
+  advisorForm = this.fb.group({
+      lastname: ['', [Validators.required, Validators.minLength(3)]],
+      firstname: ['', [Validators.required, Validators.minLength(3)]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.loadAdvisors();
@@ -37,22 +37,17 @@ export class CreateAdvisorComponent implements OnInit {
 
   // Soumettre le formulaire
   onSubmit() {
-    if (this.advisorData.lastname && this.advisorData.firstname && this.advisorData.phone && this.advisorData.email) {
-      this.advisors.push({ ...this.advisorData });
+    if (this.advisorForm.valid) {
+      const newAdvisor = { ...this.advisorForm.value };
+
+      this.advisors.push(newAdvisor);
       localStorage.setItem('advisors', JSON.stringify(this.advisors));
 
       alert('Conseiller ajouté avec succès !');
 
-      // Réinitialiser le formulaire
-      this.advisorData = {
-        lastname: '',
-        firstname: '',
-        phone: '',
-        email: '',
-        role: 'conseiller'
-      };
+      this.advisorForm.reset();
 
-      this.router.navigate(['/list-advisors']); // Redirection vers la liste des conseillers
+      this.router.navigate(['/list-advisors']);
     } else {
       alert('Veuillez remplir tous les champs correctement.');
     }

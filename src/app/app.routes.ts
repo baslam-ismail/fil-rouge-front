@@ -1,6 +1,5 @@
-// app.routes.ts
 import { NgModule } from "@angular/core";
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HelpBankAdvisorComponent } from './help-bank-advisor/help-bank-advisor.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
@@ -20,6 +19,7 @@ import { ClientManagementComponent } from './client-management/client-management
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
 import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component';
 import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
+import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 
 
 export const routes: Routes = [
@@ -47,10 +47,11 @@ export const routes: Routes = [
     { path: 'requests-form', component: RequestsFormComponent },
     { path: 'requests-form', component: RequestsFormComponent },
     { path: 'chatbot', component: ChatbotComponent},
-    {path : 'login', component: LoginComponent},
-    { path: 'create-advisor', component: CreateAdvisorComponent },
-    { path: 'list-advisors', component: ListAdvisorsComponent },
-    { path: 'client-management', component:ClientManagementComponent}
+    { path : 'login', component: LoginComponent},
+    { path: 'create-advisor', component: CreateAdvisorComponent},
+    { path: 'list-advisors', component: ListAdvisorsComponent},
+    { path: 'client-management', component:ClientManagementComponent},
+    {path : 'forgot-password', component: ForgotPasswordComponent}
 
 ];
 @NgModule({
