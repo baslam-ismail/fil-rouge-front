@@ -29,13 +29,11 @@ export class CreateAdvisorComponent implements OnInit {
     this.loadAdvisors();
   }
 
-  // Charger les conseillers depuis localStorage
   loadAdvisors() {
     const storedAdvisors = localStorage.getItem('advisors');
     this.advisors = storedAdvisors ? JSON.parse(storedAdvisors) : [];
   }
 
-  // Soumettre le formulaire
   onSubmit() {
     if (this.advisorForm.valid) {
       const newAdvisor = { ...this.advisorForm.value };

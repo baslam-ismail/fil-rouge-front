@@ -20,7 +20,7 @@ import { BannerComponent } from '../../banner/banner.component';
 })
 export class RequestsFormComponent {
   requestsForm = this.fb.group({
-    accountNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    email: ['', [Validators.required, Validators.email]],
     subject: ['', Validators.required],
     title: ['', [Validators.required, Validators.minLength(7)]],
     description: ['', [Validators.required, Validators.maxLength(250)]]

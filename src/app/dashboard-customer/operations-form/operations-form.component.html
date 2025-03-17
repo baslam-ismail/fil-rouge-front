@@ -7,11 +7,11 @@
 
     <form [formGroup]="operationsForm" (ngSubmit)="submitRequest()">
       <div class="form-group">
-        <label for="accountNumber">Numéro de Compte :</label>
-        <input id="accountNumber" formControlName="accountNumber" required placeholder="Indiquez votre compte"/>
-        <div *ngIf="operationsForm.get('accountNumber')?.invalid && operationsForm.get('accountNumber')?.touched">
-          <small class="error-message" *ngIf="operationsForm.get('accountNumber')?.errors?.['required']">Le numéro de compte est requis.</small>
-          <small class="error-message" *ngIf="operationsForm.get('accountNumber')?.errors?.['pattern']">Le numéro de compte doit contenir uniquement des chiffres.</small>
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="Entrez l'email de connexion" />
+        <div *ngIf="operationsForm.get('email')?.invalid && operationsForm.get('email')?.touched">
+          <small class="error-message" *ngIf="operationsForm.get('email')?.errors?.['required']">L'email est requis.</small>
+          <small class="error-message" *ngIf="operationsForm.get('email')?.errors?.['email']">L'email doit être valide.</small>
         </div>
       </div>
       

@@ -32,17 +32,14 @@ export class CreateAccountComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Charger les utilisateurs existants
     this.loadUsers();
   }
 
-  // Charger les utilisateurs depuis localStorage
   loadUsers() {
     const storedUsers = localStorage.getItem('users');
     this.users = storedUsers ? JSON.parse(storedUsers) : [];
   }
 
-  // Soumettre le formulaire
   onSubmit() {
     if (this.accountForm.valid) {
       const newAccount = { ...this.accountForm.value };
@@ -51,11 +48,7 @@ export class CreateAccountComponent implements OnInit {
       localStorage.setItem('users', JSON.stringify(this.users));
 
       alert(`Compte créé avec succès !`);
-
-      // Réinitialiser le formulaire
       this.accountForm.reset();
-
-      // Recharger la liste
       this.loadUsers();
     } else {
       alert('Veuillez remplir tous les champs correctement.');

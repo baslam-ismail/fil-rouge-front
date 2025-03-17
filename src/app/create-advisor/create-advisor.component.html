@@ -35,7 +35,7 @@
 
       <div class="form-group">
         <label for="phone">Numéro de téléphone</label>
-        <input type="text" id="phone" [formControlName="phone" placeholder="Entrez le numéro de téléphone" />
+        <input type="text" id="phone" formControlName="phone" placeholder="Entrez le numéro de téléphone" />
         <div *ngIf="advisorForm.get('phone')?.invalid && advisorForm.get('phone')?.touched">
           <small class="error-message" *ngIf="advisorForm.get('phone')?.errors?.['required']">Le téléphone est requis.</small>
           <small class="error-message" *ngIf="advisorForm.get('phone')?.errors?.['pattern']">Le téléphone doit contenir 10 chiffres.</small>
