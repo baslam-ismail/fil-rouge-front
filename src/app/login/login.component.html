@@ -3,43 +3,112 @@
     <!-- Partie gauche : Formulaire -->
     <div class="form-section">
       <div class="logo-title">
-        <img src="assets/images/logo.png" alt="Logo MALSI" class="logo">
+        <div class="logo-container">
+          <img src="assets/images/logo.png" alt="Logo MALSI" class="logo">
+        </div>
         <h1 class="title">MALSI</h1>
       </div>
 
-      <h2 class="welcome-message">Bienvenue 👋</h2>
+      <div class="welcome-container">
+        <h2 class="welcome-message">Bienvenue <span class="emoji">👋</span></h2>
+        <div class="accent-bar"></div>
+      </div>
 
       <p class="subtitle">
-        Aujourd’hui, tout est possible. Connectez-vous et faites avancer vos projets avec énergie et inspiration !
+        Aujourd'hui, tout est possible. Connectez-vous et faites avancer vos projets avec énergie et inspiration !
       </p>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" placeholder="Example@email.com" required />
-        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <small class="error-message" *ngIf="loginForm.get('email')?.errors?.['required']">L'email est requis.</small>
-          <small class="error-message" *ngIf="loginForm.get('email')?.errors?.['email']">L'email doit être valide.</small>
+        <div class="form-group" [ngClass]="{'error': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+          <label for="email">Email</label>
+          <div class="input-wrapper">
+            <div class="input-icon left">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="exemple@email.com"
+              required
+            />
+            <div class="input-icon right validation" *ngIf="loginForm.get('email')?.valid">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">L'email est requis.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">L'email doit être valide.</small>
+          </div>
         </div>
 
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" formControlName="password" placeholder="***********" required />
-        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          <small class="error-message" *ngIf="loginForm.get('password')?.errors?.['required']">Le mot de passe est requis.</small>
-          <small class="error-message" *ngIf="loginForm.get('password')?.errors?.['minlength']">Le mot de passe doit contenir au moins 8 caractères.</small>
-          <small class="error-message" *ngIf="loginForm.get('password')?.errors?.['pattern']">Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.</small>
+        <div class="form-group" [ngClass]="{'error': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+          <label for="password">Mot de passe</label>
+          <div class="input-wrapper">
+            <div class="input-icon left">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••••"
+              required
+            />
+            <div class="input-icon right toggle-password" (click)="togglePasswordVisibility()">
+              <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            </div>
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <small *ngIf="loginForm.get('password')?.errors?.['required']">Le mot de passe est requis.</small>
+          </div>
         </div>
 
-        <a href="/forgot-password" class="forgot-password">Mot de passe oublié?</a>
+        <div class="forgot-password-wrapper">
+          <a href="/forgot-password" class="forgot-password">Mot de passe oublié?</a>
+        </div>
 
-        <button type="submit" class="submit-btn">Se connecter</button>
+        <button type="submit" class="submit-btn" [disabled]="loginForm.invalid">
+          <span>Se connecter</span>
+          <div class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </button>
+        <button type="button" class="create-account-btn" routerLink="/register">
+          <span>Créer un compte</span>
+          <div class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          </div>
+        </button>
       </form>
 
-      <p class="footer">© 2024 ALL RIGHTS RESERVED</p>
+      <div class="footer">
+        <p>© 2024 MALSI. Tous droits réservés.</p>
+      </div>
     </div>
 
-    <!-- Partie droite : Image -->
+    <!-- Partie droite : Image avec overlay -->
     <div class="image-section">
-      <img src="assets/images/login.jpg" alt="Image de connexion">
+      <div class="image-overlay"></div>
+      <div class="testimonial-container">
+        <div class="quote-mark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z"/></svg>
+        </div>
+        <p class="testimonial-text">
+          MALSI nous a permis de transformer notre façon de travailler et d'atteindre nos objectifs plus rapidement.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+<!--            <img src="assets/images/avatar.jpg" alt="Marie Dupont" onerror="this.src='assets/images/avatar-placeholder.jpg'">-->
+          </div>
+          <div class="author-info">
+            <h4>Marie Dupont</h4>
+            <p>Directrice Marketing</p>
+          </div>
+        </div>
+      </div>
+      <img src="assets/images/login.jpg" alt="Image de connexion" class="background-image">
     </div>
   </div>
 </div>

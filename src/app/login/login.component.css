@@ -1,136 +1,641 @@
-/* Conteneur principal qui centre tout */
+/* Importation de police */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Structure principale - 100% de la hauteur de l'écran */
 .login-wrapper {
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #222; /* Fond gris foncé */
+  background: radial-gradient(ellipse at top, rgba(255, 107, 0, 0.15), transparent 70%),
+  radial-gradient(ellipse at bottom, rgba(20, 184, 166, 0.15), transparent 70%),
+  linear-gradient(120deg, #F8FAFC, #FFF7ED 80%, #ECFDF5);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-/* Boîte centrale contenant le formulaire et l'image */
 .login-box {
   display: flex;
-  width: 100%; /* Largeur fixe */
-  height: 100%; /* Hauteur fixe */
-  background-color: #000; /* Fond noir */
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-  overflow: hidden; /* Pour éviter les débordements */
+  width: 95%;
+  height: 95vh;
+  max-width: 1500px;
+  max-height: 800px;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
-/* Partie gauche : Formulaire */
+/* Section formulaire avec scrollbar masqué si nécessaire */
 .form-section {
-  width: 50%;
-  padding: 40px;
-  color: white;
+  flex: 1;
+  padding: 2.5rem 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  background: linear-gradient(135deg, #FFFFFF, #FFF7ED);
+  border: 2px solid #00B4DB;
+  border-radius: 24px 0 0 24px;
+  box-shadow: 0 4px 20px rgba(0, 180, 219, 0.1);
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* Partie droite : Image */
-.image-section {
-  width: 50%;
+/* Masquer scrollbar pour Chrome/Safari */
+.form-section::-webkit-scrollbar {
+  display: none;
 }
 
-.image-section img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* S'assure que l'image couvre toute la section */
-}
-
-/* Logo + Titre */
+/* Logo et titre optimisés pour l'espace */
 .logo-title {
   display: flex;
   align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00B4DB, #0083B0);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  margin-right: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 180, 219, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 180, 219, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 180, 219, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 180, 219, 0); }
 }
 
 .logo {
-  width: 40px;
-  height: auto;
+  width: 28px;
+  height: 28px;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #00ff99;
-}
-
-/* Message de bienvenue */
-.welcome-message {
   font-size: 1.5rem;
-  color: white;
-  margin-top: 5px;
+  font-weight: 700;
+  color: #2E3A59;
 }
 
-/* Texte sous le titre */
+/* Titre de bienvenue avec taille réduite */
+.welcome-container {
+  margin-bottom: 0.75rem;
+}
+
+.welcome-message {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #2E3A59;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.accent-bar {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, #00B4DB, #0083B0);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 180, 219, 0.4);
+}
+
+.emoji {
+  display: inline-block;
+  animation: wave 2s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
 .subtitle {
   font-size: 1rem;
-  color: #ccc;
-  text-align: center;
-  margin-bottom: 20px;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
 }
 
-/* Champs de saisie */
-input {
+/* Formulaire optimisé pour l'espace vertical */
+form {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background-color: #222;
-  color: #fff;
-  font-size: 1rem;
-  margin-bottom: 10px;
 }
 
-/* Effet de focus */
-input:focus {
+/* Hauteur fixe pour groupes de formulaire */
+.form-group {
+  margin-bottom: 1.25rem;
+  position: relative;
+  height: 90px; /* Hauteur fixe incluant l'espace pour les erreurs */
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2E3A59;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 2px solid #E0E7FF;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  height: 50px; /* Hauteur fixe */
+  overflow: hidden;
+}
+
+.input-wrapper:focus-within {
+  border-color: #00B4DB;
+  box-shadow: 0 0 0 4px rgba(0, 180, 219, 0.1);
+}
+
+.form-group.error .input-wrapper {
+  border-color: #FF3B30;
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.input-icon.left {
+  width: 50px;
+  height: 50px;
+  color: #94A3B8;
+  background-color: #F0F7FF;
+  border-right: 2px solid #E0E7FF;
+}
+
+.input-icon.right {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94A3B8;
+  position: absolute;
+  right: 0;
+  top: 28px;
+  z-index: 2;
+}
+
+/* Taille des icônes SVG */
+.input-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+.input-icon.validation svg {
+  color: #10B981;
+  width: 24px;
+  height: 24px;
+}
+
+.toggle-password:hover {
+  color: #00B4DB;
+  cursor: pointer;
+}
+
+/* Message d'erreur stylisé avec X */
+.error-message {
+  position: absolute;
+  left: 0;
+  top: 80px;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background-color: rgba(255, 59, 48, 0.08);
+  border-left: 3px solid #FF3B30;
+  color: #FF3B30;
+  font-size: 0.75rem;
+  font-weight: 500;
+  overflow: hidden;
+  max-height: 80px;
+}
+
+/* Styles pour les messages d'erreur multiples */
+.error-container {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.error-container li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.error-container li:last-child {
+  margin-bottom: 0;
+}
+
+.error-container li::before {
+  content: "×";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FF3B30;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 59, 48, 0.15);
+  border-radius: 50%;
+}
+
+/* Pour un seul message d'erreur */
+.error-message small {
+  position: relative;
+  padding-left: 22px;
+  display: block;
+}
+
+.error-message small::before {
+  content: "×";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FF3B30;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: rgba(255, 59, 48, 0.15);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hauteur fixe pour les groupes de formulaire */
+.form-group {
+  margin-bottom: 2rem; /* Augmenté pour accommoder les messages d'erreur */
+  position: relative;
+  min-height: 90px;
+}
+
+input {
+  flex: 1;
+  height: 100%;
+  padding: 0 12px;
+  font-size: 0.9375rem;
+  border: none;
+  background: transparent;
+  color: #1E293B;
   outline: none;
-  border-color: #00ff99;
-  box-shadow: 0 0 8px rgba(0, 255, 153, 0.5);
+}
+
+input::placeholder {
+  color: #94A3B8;
+}
+
+.input-icon.right {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94A3B8;
+  position: absolute;
+  right: 0;
+  top: 28px; /* Aligné avec l'input */
+}
+
+/* Message d'erreur avec position absolue et taille fixe */
+.error-message {
+  position: absolute;
+  left: 0;
+  top: 80px;
+  width: 100%;
+  color: #FF3B30;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.error-message small {
+  position: relative;
+  padding-left: 18px;
+}
+
+.error-message small::before {
+  content: "×";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FF3B30;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 /* Lien mot de passe oublié */
+.forgot-password-wrapper {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
 .forgot-password {
-  font-size: 0.9rem;
-  color: #00ff99;
+  color: #00B4DB;
   text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .forgot-password:hover {
-  text-decoration: underline;
+  color: #0091B0;
 }
 
-/* Bouton */
+/* Boutons optimisés pour l'espace */
 .submit-btn {
   width: 100%;
-  padding: 12px;
-  background-color: #00ff99;
-  color: #000;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #FF6B00, #FF8F40);
+  color: #FFFFFF;
   border: none;
   border-radius: 8px;
-  font-weight: bold;
+  font-size: 0.9375rem;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-.submit-btn:hover {
-  background-color: #00cc77;
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(45deg, #FF7D1A, #FFA64D);
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
 }
 
-/* Pied de page */
+.submit-btn:disabled {
+  background: linear-gradient(45deg, #FF6B00, #FF8F40);
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+  animation: pulse 2s infinite;
+}
+
+.create-account-btn {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  color: #00B4DB;
+  border: 2px solid #00B4DB;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.create-account-btn:hover {
+  background: rgba(0, 180, 219, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 180, 219, 0.2);
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-icon,
+.create-account-btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+/* Footer avec taille réduite */
 .footer {
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 15px;
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #94A3B8;
+  padding-top: 0.75rem;
 }
 
-.error-message {
-  color: red;
-  font-weight: bold;
+/* Section image */
+.image-section {
+  flex: 1.2;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom,
+  rgba(0, 0, 0, 0.3) 0%,
+  rgba(0, 0, 0, 0.7) 80%);
+}
+
+.testimonial-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 5px solid #00B4DB;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.quote-mark svg {
+  width: 36px;
+  height: 36px;
+  color: #00B4DB;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-text {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #00B4DB;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-info h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #00B4DB;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.author-info p {
+  font-size: 0.875rem;
+  color: white;
+  opacity: 0.9;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .login-box {
+    width: 98%;
+    height: 98vh;
+  }
+
+  .form-section {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .login-box {
+    flex-direction: column;
+  }
+
+  .form-section {
+    flex: 3;
+    padding: 1.5rem;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .image-section {
+    flex: 2;
+    order: -1;
+    border-radius: 0 0 24px 24px;
+  }
+
+  .testimonial-container {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-box {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .form-section {
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .welcome-message {
+    font-size: 1.75rem;
+  }
+
+  .form-group {
+    height: 80px;
+  }
+
+  .testimonial-text {
+    font-size: 1rem;
+  }
 }
