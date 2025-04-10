@@ -2,7 +2,7 @@ export const API_ENDPOINTS = {
 
   AUTH: {
     LOGIN: '/auth/login',
-    REGISTER: '/users/create'
+    REGISTER: '/auth/register' // Updated registration endpoint
   },
 
   USERS: {

@@ -20,6 +20,7 @@ import { DashboardCustomerComponent } from './dashboard-customer/dashboard-custo
 import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component';
 import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
+import { RegisterComponent } from "./register/register.component";
 
 
 export const routes: Routes = [
@@ -48,6 +49,7 @@ export const routes: Routes = [
     { path: 'requests-form', component: RequestsFormComponent },
     { path: 'chatbot', component: ChatbotComponent},
     { path : 'login', component: LoginComponent},
+    { path: 'register', component: RegisterComponent },
     { path: 'create-advisor', component: CreateAdvisorComponent},
     { path: 'list-advisors', component: ListAdvisorsComponent},
     { path: 'client-management', component:ClientManagementComponent},
