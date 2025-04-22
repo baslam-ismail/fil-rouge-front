@@ -34,9 +34,9 @@
         <div class="form-group">
           <label>Statut</label>
           <select [(ngModel)]="operation.status" class="editable">
-            <option value="Nouveau">Nouveau</option>
-            <option value="En cours">En cours</option>
-            <option value="Traité">Traité</option>
+            <option [value]="OperationStatus.NOUVEAU">Nouveau</option>
+            <option [value]="OperationStatus.EN_COURS">En cours</option>
+            <option [value]="OperationStatus.TRAITE">Traité</option>
           </select>
         </div>
       </div>

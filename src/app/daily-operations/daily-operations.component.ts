@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DailyOperationsService } from './daily-operations.service';
-// import { NotificationService } from '../shared/services/notification.service';
 import { TableComponent } from '../shared/components/table/table.component';
 import { TableOptions } from '../shared/components/table/table.model';
 import {DailyOperation, OperationColumn,} from './daily-operations.model';
@@ -13,6 +12,7 @@ import {DailyOperationModalComponent} from "./daily-operations-modal/daily-opera
 import {NotificationToastComponent} from "../shared/components/notification/notification-toast.component";
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { BannerComponent } from '../banner/banner.component';
+import { StatsBannerComponent } from '../shared/stats-banner/stats-banner.component';
 
 interface DateRange {
   start: string;
@@ -31,12 +31,35 @@ interface DateRange {
     DailyOperationModalComponent,
     NotificationToastComponent,
     SidebarComponent,
-    BannerComponent
+    BannerComponent,
+    StatsBannerComponent
   ]
 })
 export class DailyOperationsComponent implements OnInit, OnDestroy {
   @ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
   @ViewChild('priorityTemplate') priorityTemplate!: TemplateRef<any>;
+
+  // Données pour la bannière de stats
+  statsBanner = [
+    {
+      icon: 'activity' as 'activity',
+      color: 'blue' as 'blue',
+      label: 'Opérations en cours',
+      value: 8
+    },
+    {
+      icon: 'bar-chart' as 'bar-chart',
+      color: 'green' as 'green',
+      label: 'Traitées aujourd\'hui',
+      value: 12
+    },
+    {
+      icon: 'alert-triangle' as 'alert-triangle',
+      color: 'orange' as 'orange',
+      label: 'En attente',
+      value: 5
+    }
+  ];
 
   // Filtres
   showFilters = true;
@@ -53,7 +76,7 @@ export class DailyOperationsComponent implements OnInit, OnDestroy {
   readonly priorityOptions = Object.values(OperationPriority);
   readonly categoryOptions = Object.values(OperationCategory);
 
-  private originalData: DailyOperation[] = [];
+  originalData: DailyOperation[] = []; // Changed from private to public
   filteredOperations: DailyOperation[] = [];
 
   // Configuration du tableau
@@ -126,6 +149,7 @@ export class DailyOperationsComponent implements OnInit, OnDestroy {
         next: (operations) => {
           this.originalData = operations; // Stockage des données originales
           this.filteredOperations = [...operations];
+          this.updateStatsBanner(operations);
           this.applyFilters();
         },
         error: (error) => {
@@ -137,10 +161,31 @@ export class DailyOperationsComponent implements OnInit, OnDestroy {
     this.subscription.add(operationsSub);
   }
 
+  private updateStatsBanner(operations: DailyOperation[]): void {
+    if (operations && operations.length > 0) {
+      // Opérations en cours
+      const inProgress = operations.filter(op => op.status === OperationStatus.EN_COURS).length;
+      this.statsBanner[0].value = inProgress;
+
+      // Opérations traitées aujourd'hui
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const completedToday = operations.filter(op => {
+        const opDate = new Date(op.date);
+        opDate.setHours(0, 0, 0, 0);
+        return op.status === OperationStatus.TRAITE && opDate.getTime() === today.getTime();
+      }).length;
+      this.statsBanner[1].value = completedToday;
+
+      // Opérations en attente
+      const pending = operations.filter(op => op.status === OperationStatus.NOUVEAU).length;
+      this.statsBanner[2].value = pending;
+    }
+  }
+
   refreshData(): void {
     this.loadOperations();
     this.resetFilters();
-    // this.notificationService.success('Données actualisées');
   }
 
   applyFilters(): void {
@@ -184,7 +229,6 @@ export class DailyOperationsComponent implements OnInit, OnDestroy {
     };
 
     this.filteredOperations = [...this.originalData];
-    // this.notificationService.success('Filtres réinitialisés');
   }
 
   onEdit(operation: DailyOperation): void {

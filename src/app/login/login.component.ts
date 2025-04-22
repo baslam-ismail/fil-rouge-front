@@ -1,103 +1,91 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import {Store, StoreModule} from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import * as AuthActions from '../store/auth/auth.actions';
-import * as AuthSelectors from '../store/auth/auth.selectors';
-import {AuthState} from "../core/auth/models/auth.models";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, StoreModule ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm!: FormGroup;
   showPassword = false;
-  isLoading$: Observable<boolean>;
-  error$: Observable<string | null>;
+  isLoading$: Observable<boolean> = of(false);
+  error$: Observable<string | null> = of(null);
 
   constructor(
-    private fb: FormBuilder,
-    private store: Store<{ auth: AuthState }>
+    private formBuilder: FormBuilder,
+    private store: Store
   ) {
-
-
-    this.loginForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
 
-
-    this.isLoading$ = this.store.select(AuthSelectors.selectIsLoading);
-    this.error$ = this.store.select(AuthSelectors.selectError);
+    this.initStoreSelectors();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
+  private initStoreSelectors(): void {
+    setTimeout(() => {
+      try {
+        this.isLoading$ = this.store.select((state: any) => {
+          return state?.auth?.isLoading ?? false;
+        }).pipe(
+          catchError(error => {
+            console.warn('Erreur d\'accès au store (isLoading):', error);
+            return of(false);
+          })
+        );
+
+        this.error$ = this.store.select((state: any) => {
+          return state?.auth?.error ?? null;
+        }).pipe(
+          catchError(error => {
+            console.warn('Erreur d\'accès au store (error):', error);
+            return of(null);
+          })
+        );
+      } catch (error) {
+        console.warn('Erreur lors de l\'initialisation des sélecteurs:', error);
+      }
+    }, 100);
+  }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.store.dispatch(AuthActions.login({ email, password }));
+      try {
+        const { email, password } = this.loginForm.value;
+
+        this.store.dispatch(AuthActions.login({
+          credentials: { email, password }
+        }));
+      } catch (error) {
+        console.error('Erreur lors de la tentative de connexion:', error);
+      }
     } else {
-      this.markFormGroupTouched(this.loginForm);
+      Object.keys(this.loginForm.controls).forEach(key => {
+        this.loginForm.get(key)?.markAsTouched();
+      });
     }
   }
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
-  }
-
-
-  private markFormGroupTouched(formGroup: FormGroup): void {
-    Object.values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-    });
-  }
-
-
-  get hasMinLength(): boolean {
-    const password = this.loginForm.get('password')?.value || '';
-    return password.length >= 8;
-  }
-
-  get hasUpperCase(): boolean {
-    const password = this.loginForm.get('password')?.value || '';
-    return /[A-Z]/.test(password);
-  }
-
-  get hasLowerCase(): boolean {
-    const password = this.loginForm.get('password')?.value || '';
-    return /[a-z]/.test(password);
-  }
-
-  get hasNumber(): boolean {
-    const password = this.loginForm.get('password')?.value || '';
-    return /\d/.test(password);
-  }
-
-  get hasSpecialChar(): boolean {
-    const password = this.loginForm.get('password')?.value || '';
-    return /[@$!%*?&]/.test(password);
-  }
-
-  getPasswordStrength(): string {
-    const checks = [
-      this.hasMinLength,
-      this.hasUpperCase,
-      this.hasLowerCase,
-      this.hasNumber,
-      this.hasSpecialChar
-    ].filter(Boolean).length;
-
-    if (checks <= 2) return 'weak';
-    if (checks <= 4) return 'medium';
-    return 'strong';
   }
 }

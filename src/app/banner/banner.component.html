@@ -1,37 +1,52 @@
-<div class="greeting">
-    <h3>Bonjour Evano 👋, voici votre récapitulatif du jour :</h3>
+<div class="page-header">
+  <div class="greeting">Bonjour Evano</div>
+  <div class="recap-banner">
+    <div class="recap-content">
+      <span class="emoji">👋</span>
+      <span class="recap-text">voici votre récapitulatif du jour</span>
+    </div>
+    <app-theme-toggle></app-theme-toggle>
   </div>
-  <div class="banner">
-    <div class="summary">
-      <div class="summary-item">
-        <div class="icon">
-          <span>👤</span>
-        </div>
-        <div class="info">
-          <p>Rendez-vous</p>
-          <p class="number">{{ rendezVous }}</p>
-        </div>
-      </div>
-      <div class="separator"></div>
-      <div class="summary-item">
-        <div class="icon">
-          <span>🧾</span>
-        </div>
-        <div class="info">
-          <p>Demandes de services</p>
-          <p class="number">{{ demandesServices }}</p>
-        </div>
-      </div>
-      <div class="separator"></div>
-      <div class="summary-item">
-        <div class="icon">
-          <span>💻</span>
-        </div>
-        <div class="info">
-          <p>Demandes d'opérations</p>
-          <p class="number">{{ demandesOperations }}</p>
-        </div>
-      </div>
+</div>
+
+<div class="dashboard-summary">
+  <div class="summary-card">
+    <div class="summary-icon blue">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="5"></circle>
+        <path d="M20 21a8 8 0 0 0-16 0"></path>
+      </svg>
+    </div>
+    <div class="summary-content">
+      <div class="summary-label">Rendez-vous</div>
+      <div class="summary-value">{{ rendezVous }}</div>
     </div>
   </div>
-  
+
+  <div class="summary-card">
+    <div class="summary-icon green">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        <path d="M7 15h0"></path>
+        <path d="M2 9h20"></path>
+      </svg>
+    </div>
+    <div class="summary-content">
+      <div class="summary-label">Demandes de services</div>
+      <div class="summary-value">{{ demandesServices }}</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-icon orange">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+        <path d="M22 10H2"></path>
+      </svg>
+    </div>
+    <div class="summary-content">
+      <div class="summary-label">Demandes d'opérations</div>
+      <div class="summary-value">{{ demandesOperations }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,213 @@
+<app-sidebar></app-sidebar>
+<div class="app-container">
+  <div class="main-content">
+    <div class="dashboard-content">
+      <!-- Bannière de statistiques unifiée -->
+      <app-stats-banner [stats]="statsBanner"></app-stats-banner>
+
+      <!-- Section principale -->
+      <div class="main-content-panel">
+        <!-- En-tête avec titre et icône -->
+        <div class="rdv-header">
+          <div class="rdv-header-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="rdv-header-content">
+            <h2 class="rdv-title">Création de compte</h2>
+            <p class="rdv-subtitle">Remplissez les informations pour créer un nouveau compte client</p>
+          </div>
+        </div>
+
+        <!-- Alertes -->
+        <div class="alerts-container" *ngIf="successMessage || errorMessage">
+          <div class="alert-box alert-success" *ngIf="successMessage">
+            <div class="alert-icon">✅</div>
+            <div class="alert-message">{{ successMessage }}</div>
+          </div>
+
+          <div class="alert-box alert-error" *ngIf="errorMessage">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-message">{{ errorMessage }}</div>
+          </div>
+        </div>
+
+        <!-- Formulaire et actions -->
+        <div class="rdv-actions">
+          <div class="form-container">
+            <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="creation-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nom">Nom</label>
+                  <input
+                    type="text"
+                    id="nom"
+                    formControlName="nom"
+                    placeholder="Entrez le nom"
+                    [ngClass]="{'input-error': submitted && f['nom'].errors}"
+                  >
+                  <div class="error-message" *ngIf="submitted && f['nom'].errors">
+                    <span *ngIf="f['nom'].errors['required']">Le nom est requis.</span>
+                    <span *ngIf="f['nom'].errors['minlength']">Le nom doit contenir au moins 2 caractères.</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="prenom">Prénom</label>
+                  <input
+                    type="text"
+                    id="prenom"
+                    formControlName="prenom"
+                    placeholder="Entrez le prénom"
+                    [ngClass]="{'input-error': submitted && f['prenom'].errors}"
+                  >
+                  <div class="error-message" *ngIf="submitted && f['prenom'].errors">
+                    <span *ngIf="f['prenom'].errors['required']">Le prénom est requis.</span>
+                    <span *ngIf="f['prenom'].errors['minlength']">Le prénom doit contenir au moins 2 caractères.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    placeholder="Entrez l'email"
+                    [ngClass]="{'input-error': submitted && f['email'].errors}"
+                  >
+                  <div class="error-message" *ngIf="submitted && f['email'].errors">
+                    <span *ngIf="f['email'].errors['required']">L'email est requis.</span>
+                    <span *ngIf="f['email'].errors['email']">Veuillez entrer un email valide.</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Téléphone</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    formControlName="phone"
+                    placeholder="Ex: 0600000000"
+                    [ngClass]="{'input-error': submitted && f['phone'].errors}"
+                  >
+                  <div class="error-message" *ngIf="submitted && f['phone'].errors">
+                    <span *ngIf="f['phone'].errors['required']">Le numéro de téléphone est requis.</span>
+                    <span *ngIf="f['phone'].errors['pattern']">Le numéro doit contenir 10 chiffres.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group full-width">
+                  <label for="address">Adresse (optionnelle)</label>
+                  <textarea
+                    id="address"
+                    formControlName="address"
+                    placeholder="Entrez l'adresse"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="type">Type de compte</label>
+                  <select id="type" formControlName="type" class="filter-select">
+                    <option value="">Sélectionnez un type</option>
+                    <option value="courant">Compte courant</option>
+                    <option value="epargne">Compte épargne</option>
+                    <option value="joint">Compte joint</option>
+                    <option value="pro">Compte professionnel</option>
+                  </select>
+                  <div class="error-message" *ngIf="submitted && f['type']?.errors?.['required']">
+                    Le type de compte est requis.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="priorite">Priorité</label>
+                  <select id="priorite" formControlName="priorite" class="filter-select">
+                    <option value="">Sélectionnez une priorité</option>
+                    <option value="Haute">Haute</option>
+                    <option value="Moyenne">Moyenne</option>
+                    <option value="Basse">Basse</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  (click)="resetForm()"
+                >
+                  Réinitialiser
+                </button>
+
+                <button
+                  type="submit"
+                  class="new-rdv-btn"
+                  [disabled]="loading"
+                >
+                  <span *ngIf="!loading">Créer compte</span>
+                  <span *ngIf="loading">Création en cours...</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Documents requis -->
+        <div class="rdv-table-wrapper">
+          <table class="rdv-table">
+            <thead>
+              <tr>
+                <th colspan="2">Documents requis pour l'ouverture de compte</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="document-check">✓</div>
+                </td>
+                <td>
+                  <div class="document-info">
+                    <h4>Pièce d'identité</h4>
+                    <p>Carte d'identité, passeport ou titre de séjour en cours de validité</p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="document-check">✓</div>
+                </td>
+                <td>
+                  <div class="document-info">
+                    <h4>Justificatif de domicile</h4>
+                    <p>Facture d'électricité, de gaz ou de téléphone de moins de 3 mois</p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="document-check">✓</div>
+                </td>
+                <td>
+                  <div class="document-info">
+                    <h4>Justificatif de revenus</h4>
+                    <p>Dernier bulletin de salaire ou avis d'imposition</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="creation-sidebar">
+  <!-- Section des statistiques -->
+  <div class="stats-section">
+    <div class="stats-container">
+      <!-- Cartes statistiques générées dynamiquement -->
+      <div class="stat-card" *ngFor="let stat of statsItems" [ngStyle]="{'background-color': stat.bgColor}">
+        <div class="stat-icon" [ngStyle]="{'color': stat.iconColor}" [innerHTML]="getIcon(stat.icon)"></div>
+        <div class="stat-count">{{ stat.count }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Titre de la section -->
+  <div class="section-title">
+    <div class="title-icon">
+      <span [innerHTML]="getIcon('calendar')"></span>
+    </div>
+    <div class="title-text">
+      <h2>Création de compte</h2>
+      <p>Nouveau compte client</p>
+    </div>
+  </div>
+
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <div class="search-icon" [innerHTML]="getIcon('search')"></div>
+    <input type="text" placeholder="Rechercher..." class="search-input">
+  </div>
+
+  <!-- Bouton Nouveau compte -->
+  <button class="new-account-button">
+    <span class="button-icon" [innerHTML]="getIcon('plus')"></span>
+    <span class="button-text">Nouveau compte</span>
+  </button>
+
+  <!-- Étapes du processus -->
+  <div class="steps-container">
+    <div class="step-item" *ngFor="let step of stepsItems; let i = index" [ngClass]="{'step-active': step.status === 'current', 'step-completed': step.status === 'completed'}">
+      <div class="step-number">{{ i + 1 }}</div>
+      <div class="step-icon" [innerHTML]="getIcon(step.icon)"></div>
+      <div class="step-content">
+        <div class="step-title">{{ step.title }}</div>
+        <div class="step-description">{{ step.description }}</div>
+      </div>
+      <div class="step-status" *ngIf="step.status === 'completed'">
+        <span [innerHTML]="getIcon('check-circle')"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section des documents requis -->
+  <div class="documents-section">
+    <h3 class="documents-title">Documents requis</h3>
+    <div class="document-list">
+      <div class="document-item">
+        <span class="document-icon">📄</span>
+        <span class="document-name">Pièce d'identité</span>
+      </div>
+      <div class="document-item">
+        <span class="document-icon">📄</span>
+        <span class="document-name">Justificatif de domicile</span>
+      </div>
+      <div class="document-item">
+        <span class="document-icon">📄</span>
+        <span class="document-name">Relevé d'identité bancaire</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section d'assistance -->
+  <div class="help-section">
+    <h3 class="help-title">Besoin d'aide ?</h3>
+    <p class="help-text">Notre équipe est disponible pour vous aider avec le processus de création de compte.</p>
+    <button class="help-button">Contacter l'assistance</button>
+  </div>
+</div>

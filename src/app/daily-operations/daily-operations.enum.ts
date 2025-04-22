@@ -12,7 +12,8 @@ export enum OperationCategory {
 
 export enum OperationStatus {
   NOUVEAU = 'Nouveau',
-  EN_COURS = 'En cours'
+  EN_COURS = 'En cours',
+  TRAITE = 'Traité'
 }
 
 export enum OperationType {

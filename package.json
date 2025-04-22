@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:jit": "ng serve --configuration=development --ts-config=tsconfig.jit.json",
     "build": "ng build",
+    "build:jit": "ng build --configuration=development --ts-config=tsconfig.jit.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:front-malsi": "node dist/front-malsi/server/server.mjs"

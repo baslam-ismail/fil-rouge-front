@@ -1,0 +1,91 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription, of } from 'rxjs';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+
+import * as ClientActions from '../store/client-creation/client.actions';
+import * as ClientSelectors from '../store/client-creation/client.selectors';
+
+@Component({
+  selector: 'app-creation-compte',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SidebarComponent],
+  templateUrl: './creation-compte.component.html',
+  styleUrls: ['./creation-compte.component.css']
+})
+export class CreationCompteComponent implements OnInit, OnDestroy {
+  clientForm!: FormGroup;
+  // Provide default values to avoid errors
+  isLoading$: Observable<boolean> = of(false);
+  error$: Observable<string | null> = of(null);
+  success$: Observable<boolean> = of(false);
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router
+  ) {
+    this.initForm();
+    this.initSelectors();
+  }
+
+  private initForm(): void {
+    this.clientForm = this.fb.group({
+      nom: ['', [Validators.required]],
+      prenom: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      address: [''],
+    });
+  }
+
+  private initSelectors(): void {
+    try {
+      this.isLoading$ = this.store.select(ClientSelectors.selectIsLoading);
+      this.error$ = this.store.select(ClientSelectors.selectError);
+      this.success$ = this.store.select(ClientSelectors.selectSuccess);
+    } catch (error) {
+      console.error('Error initializing selectors:', error);
+    }
+  }
+
+  ngOnInit(): void {
+    // Reset client state when component initializes
+    this.store.dispatch(ClientActions.resetClientState());
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  onSubmit(): void {
+    if (this.clientForm.invalid) {
+      // Mark all fields as touched to trigger validation display
+      Object.keys(this.clientForm.controls).forEach(key => {
+        const control = this.clientForm.get(key);
+        if (control) {
+          control.markAsTouched();
+        }
+      });
+      return;
+    }
+
+    const { nom, prenom, email, phone, address } = this.clientForm.value;
+    
+    this.store.dispatch(ClientActions.createClient({
+      nom,
+      prenom,
+      email,
+      phone,
+      address
+    }));
+  }
+
+  cancel(): void {
+    this.router.navigate(['/customer-portfolio']);
+  }
+}

@@ -1,1 +1,64 @@
-<div #dateField (changeDate)="onDatePicked($event)"></div>
+<div class="calendar-container">
+  <!-- En-tête élégant avec titre centré et boutons de navigation espacés -->
+  <div class="calendar-header">
+    <button (click)="prevMonth()" class="nav-button left-button">
+      ←
+    </button>
+    <h2 class="month-title">
+      {{ formatMonthYear(currentDate) }}
+    </h2>
+    <button (click)="nextMonth()" class="nav-button right-button">
+      →
+    </button>
+  </div>
+
+  <!-- Sélecteur de mode séparé en dessous de l'en-tête -->
+  <div class="view-selector">
+    <button class="view-option active" (click)="changeMode('month')">Mois</button>
+    <button class="view-option" (click)="changeMode('week')">Sem</button>
+    <button class="view-option" (click)="changeMode('day')">Jour</button>
+  </div>
+
+  <!-- Jours de la semaine élégants -->
+  <div class="weekdays-row">
+    <div *ngFor="let day of weekdayLabels" class="weekday-cell">
+      {{ day }}
+    </div>
+  </div>
+
+  <!-- Grille du calendrier premium avec indicateurs d'événements -->
+  <div class="calendar-grid">
+    <!-- Espaces vides avant le premier jour du mois -->
+    <div *ngFor="let i of [].constructor(getFirstDayOfMonth(currentDate)); let index = index"
+         class="day-cell empty-cell" [style]="getAnimationDelay(index)">
+    </div>
+
+    <!-- Jours du mois avec indicateurs d'événements -->
+    <div *ngFor="let day of getDaysInMonth(currentDate); let index = index"
+         (click)="selectDate(day)"
+         class="day-cell"
+         [ngClass]="{
+           'today-cell': isToday(day),
+           'selected-cell': isSelected(day),
+           'has-event': hasEvent(day),
+           'has-meeting': hasEventType(day, 'meeting'),
+           'has-deadline': hasEventType(day, 'deadline'),
+           'has-reminder': hasEventType(day, 'reminder')
+         }"
+         [style]="getAnimationDelay(getFirstDayOfMonth(currentDate) + index)">
+      {{ day.getDate() }}
+    </div>
+  </div>
+
+  <!-- Pied de page avec légendes -->
+  <div class="calendar-footer">
+    <div class="date-display">
+      {{ selectedDate.toLocaleDateString('fr-FR', {weekday: 'short', day: 'numeric', month: 'short'}) }}
+    </div>
+    <div class="event-indicators">
+      <div class="event-indicator meeting-indicator">Réunion</div>
+      <div class="event-indicator deadline-indicator">Échéance</div>
+      <div class="event-indicator reminder-indicator">Rappel</div>
+    </div>
+  </div>
+</div>

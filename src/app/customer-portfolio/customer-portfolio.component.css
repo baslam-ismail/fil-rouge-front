@@ -1,160 +1,370 @@
+/* Variables de couleur pour les deux thèmes */
+:root {
+  /* Couleurs de base - mode sombre */
+  --primary: #3b82f6;
+  --primary-light: #60a5fa;
+  --secondary: #10b981;
+  --secondary-light: #34d399;
+  --accent: #f59e0b;
+  --accent-light: #fbbf24;
 
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --bg-table-row-hover: rgba(255, 255, 255, 0.05);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+
+  --border-card: rgba(255, 255, 255, 0.05);
+  --border-table: rgba(255, 255, 255, 0.1);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Variables en mode clair */
+:root[data-theme="light"] {
+  --primary: #3b82f6;
+  --primary-light: #60a5fa;
+  --secondary: #10b981;
+  --secondary-light: #34d399;
+  --accent: #f59e0b;
+  --accent-light: #fbbf24;
+
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-table-row-hover: rgba(0, 0, 0, 0.02);
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+
+  --border-card: rgba(0, 0, 0, 0.05);
+  --border-table: rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Base styles */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Zone de contenu principal */
 .main-content {
-  margin-left: 270px;
+  flex: 1;
+  margin-left: 280px;
+  padding: 20px;
+  background-color: var(--bg-main);
+  transition: margin-left 0.3s ease;
+}
+
+.dashboard-content {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Panneau principal */
+.main-content-panel {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  color: var(--text-primary);
+  border: 1px solid var(--border-card);
+}
+
+/* En-tête du panneau */
+.rdv-header {
   padding: 20px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background-color: #f5f5f5;
+  border-bottom: 1px solid var(--border-card);
 }
 
-.customer-portfolio-container {
-  width: 81%;
-  max-width: 1200px;
-  background-color: #000;
-  color: #fff;
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  margin-right: 14px;
-}
-
-h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.search-bar {
-  width: 60%;
-  padding: 12px;
-  border: none;
+.rdv-header-icon {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  background-color: #222;
-  color: #fff;
-  text-align: center;
-  margin-left: 180px;
-}
-
-.clients-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.clients-table th,
-.clients-table td {
-  border: 1px solid #444;
-  padding: 12px;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.clients-table th {
-  background-color: #333;
-  color: #fff;
-  font-weight: bold;
-}
-
-.clients-table tbody tr:nth-child(even) {
-  background-color: #222;
-}
-
-.clients-table tbody tr:hover {
-  background-color: #444;
-  cursor: pointer;
-}
-
-/* Styles pour la modale */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  margin-right: 16px;
+  color: var(--primary);
 }
 
-.modal-content {
-  background-color: #000;
-  color: #fff;
-  padding: 60px;
-  border-radius: 12px;
-  width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: left;
-  border: 2px solid white;
+.rdv-header-content {
+  flex: 1;
 }
 
-.close-btn {
-  font-size: 1.5rem;
-  color: #fff;
-  cursor: pointer;
-  float: right;
+.rdv-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.rdv-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
-input {
+/* Barre d'actions */
+.rdv-actions {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--border-card);
+}
+
+.search-container {
+  flex: 1;
+  position: relative;
+}
+
+.search-input {
   width: 100%;
-  padding: 8px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 10px 16px 10px 40px;
+  border: 1px solid var(--border-card);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.filter-select {
+  padding: 10px 16px;
+  border: 1px solid var(--border-card);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  min-width: 150px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+:root[data-theme="light"] .filter-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.new-rdv-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: var(--primary);
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  font-weight: bold;
-  margin-top: 10px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
-button:hover {
-  background-color: #0056b3;
+.new-rdv-btn:hover {
+  background-color: var(--primary-light);
 }
 
-.delete-btn {
-  background-color: red;
-  margin-left: 10px;
+/* Table des clients */
+.rdv-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }
+
+.rdv-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rdv-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-table);
+  text-transform: uppercase;
+}
+
+.rdv-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-table);
+  font-size: 14px;
+}
+
+.rdv-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.rdv-table tbody tr:hover {
+  background-color: var(--bg-table-row-hover);
+}
+
+/* Indicateurs de statut */
+.priority-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-actif {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.status-inactif {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* Boutons d'actions */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-card);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.view-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.edit-btn:hover {
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+/* Pagination */
+.rdv-pagination {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-card);
+}
+
+.pagination-info {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
 .pagination-controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    font-size: 1rem;
+  display: flex;
+  gap: 8px;
+}
+
+.pagination-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-card);
+  background-color: transparent;
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-btn.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn:not(:disabled):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="light"] .pagination-btn:not(:disabled):hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Adaptations du mode clair spécifiques */
+:root[data-theme="light"] .rdv-header-icon {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme="light"] .action-btn {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="light"] .action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsivité */
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0;
   }
-  
-  .pagination-controls button {
-    padding: 8px 12px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 8px;
-    background-color: #444;
-    color: #fff;
-    cursor: pointer;
+
+  .rdv-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  .pagination-controls button.active {
-    background-color: #007bff;
+
+  .search-container, .filter-select, .new-rdv-btn {
+    margin-bottom: 10px;
   }
-  
-  .pagination-controls button:disabled {
-    background-color: #888;
-    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .rdv-pagination {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
   }
-  
+}

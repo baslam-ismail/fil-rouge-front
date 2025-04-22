@@ -1,11 +1,30 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialAuthState } from './auth.state';
 import * as AuthActions from './auth.actions';
+import { AuthState } from '../../core/auth/models/auth.models';
+
+function isBrowser(): boolean {
+  return typeof window !== 'undefined';
+}
+
+function getToken(): string | null {
+  if (isBrowser()) {
+    return localStorage.getItem('token');
+  }
+  return null;
+}
+
+export const initialState: AuthState = {
+  user: null,
+  token: getToken(),
+  isAuthenticated: !!getToken(),
+  isLoading: false,
+  error: null
+};
 
 export const authReducer = createReducer(
-  initialAuthState,
+  initialState,
 
-  on(AuthActions.login, (state) => ({
+  on(AuthActions.login, state => ({
     ...state,
     isLoading: true,
     error: null
@@ -21,40 +40,18 @@ export const authReducer = createReducer(
 
   on(AuthActions.loginFailure, (state, { error }) => ({
     ...state,
-    token: null,
-    isAuthenticated: false,
     isLoading: false,
     error
   })),
 
-  on(AuthActions.loadUser, (state) => ({
+  on(AuthActions.register, state => ({
     ...state,
     isLoading: true,
     error: null
   })),
 
-  on(AuthActions.loadUserSuccess, (state, { user }) => ({
+  on(AuthActions.registerSuccess, state => ({
     ...state,
-    user,
-    isLoading: false,
-    error: null
-  })),
-
-  on(AuthActions.loadUserFailure, (state, { error }) => ({
-    ...state,
-    isLoading: false,
-    error
-  })),
-
-  on(AuthActions.register, (state) => ({
-    ...state,
-    isLoading: true,
-    error: null
-  })),
-
-  on(AuthActions.registerSuccess, (state, { user }) => ({
-    ...state,
-    user,
     isLoading: false,
     error: null
   })),
@@ -65,11 +62,28 @@ export const authReducer = createReducer(
     error
   })),
 
-  on(AuthActions.logout, () => ({
+  on(AuthActions.logout, state => ({
+    ...state,
     user: null,
     token: null,
     isAuthenticated: false,
-    isLoading: false,
     error: null
+  })),
+
+  on(AuthActions.loadUserProfile, state => ({
+    ...state,
+    isLoading: true
+  })),
+
+  on(AuthActions.loadUserProfileSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    isLoading: false
+  })),
+
+  on(AuthActions.loadUserProfileFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error
   }))
 );

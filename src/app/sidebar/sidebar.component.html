@@ -1,70 +1,69 @@
 <div class="sidebar">
-    <div class="logo">
-        <img src="assets/images/logo.png" alt="Malsi Logo">
-      <div>
-        <span class="brand-name">MALSI</span>
-      </div>
+  <div class="logo-container">
+    <div class="logo-wrapper">
+      <img src="assets/images/logo.png" alt="Malsi Logo" class="logo-img">
     </div>
-  
-    <nav class="menu">
-      <ul>
-        <li class="menu-item active">
-          <a routerLink="/dashboard" routerLinkActive="active">
-            <span class="icon">🏠</span>
-            Tableau de bord
-          </a>
-        </li>
-        <li class="menu-item">
-          <a routerLink="/create-account" routerLinkActive="active">
-            <span class="icon">👤</span>
-            Création de compte
-          </a>
-        </li>
-        <li class="menu-item">
-          <a routerLink="/customer-portfolio" routerLinkActive="active">
-            <span class="icon">📂</span>
-            Portefeuille Client
-          </a>
-        </li>
-        <li class="menu-item">
-          <a routerLink="/appointments" routerLinkActive="active">
-            <span class="icon">📅</span>
-            Rendez-vous
-          </a>
-        </li>
-        <li class="menu-item">
-          <a routerLink="/service-requests" routerLinkActive="active">
-            <span class="icon">📝</span>
-            Demandes de services
-          </a>
-        </li>
-        <li class="menu-item">
-            <a routerLink="/daily-operation" routerLinkActive="active"> <!-- Opérations quotidiennes -->
-              <span class="icon">💳</span>
-              Opérations quotidiennes
-            </a>
-          </li>
-        <li class="menu-item">
-          <a routerLink="/help-bank-advisor" routerLinkActive="active">
-            <span class="icon">❓</span>
-            Aide
-          </a>
-        </li>
-      </ul>
-    </nav>
-  
-    <div class="user-section">
-      <div class="user-info">
-        <img src="assets/images/macron.jpg" alt="User Profile">
-        <div>
-          <a routerLink="/profil" routerLinkActive="active" class="user-name">Evano </a>
-          <br>
-          <span class="user-role">
-            <a routerLink="/profil" routerLinkActive="active" ></a> 
-            Conseiller bancaire</span>
-        </div>
-      </div>
-      <a href="#" class="logout">Se déconnecter</a>
-    </div>
+    <h1 class="logo-text">MALSI</h1>
   </div>
-  
+
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li routerLinkActive="active">
+        <a routerLink="/dashboard" class="menu-link">
+          <span class="icon">🏠</span>
+          <span>Tableau de bord</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/creation-compte" class="menu-link">
+          <span class="icon">👤</span>
+          <span>Création de compte</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/customer-portfolio" class="menu-link">
+          <span class="icon">📂</span>
+          <span>Portefeuille Client</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/appointments" class="menu-link">
+          <span class="icon">📅</span>
+          <span>Rendez-vous</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/service-requests" class="menu-link">
+          <span class="icon">📝</span>
+          <span>Demandes de services</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/daily-operation" class="menu-link">
+          <span class="icon">💳</span>
+          <span>Opérations quotidiennes</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/help-bank-advisor" class="menu-link">
+          <span class="icon">❓</span>
+          <span>Aide</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-info">
+      <img src="assets/images/macron.jpg" alt="Photo profil" class="profile-img">
+      <div class="profile-details">
+        <a routerLink="/profil" class="profile-name">Evano</a>
+        <p class="profile-role">Conseiller bancaire</p>
+      </div>
+    </div>
+    <button class="logout-button" (click)="logout()">
+      <span class="icon">🚪</span>
+      <span>Se déconnecter</span>
+    </button>
+  </div>
+</div>

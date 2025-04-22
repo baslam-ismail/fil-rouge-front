@@ -10,7 +10,7 @@ import { ChatbotComponent } from '../chatbot/chatbot.component';
   standalone: true,
   imports: [
     SidebarComponent,
-    BannerComponent, // Ajout du composant calendrier
+    BannerComponent,
     SummaryComponent,
     ChatbotComponent
 ],

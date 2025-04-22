@@ -1,116 +1,182 @@
 <app-sidebar></app-sidebar>
-<div class="main-content">
-  <app-banner></app-banner>
+<div class="app-container">
+  <div class="main-content">
+    <div class="dashboard-content">
+      <!-- Bannière de statistiques unifiée -->
+      <app-stats-banner [stats]="statsBanner"></app-stats-banner>
 
-  <!-- daily-operations.component.html -->
-<div class="daily-operations-page">
-  <!-- En-tête -->
-  <header class="page-header">
-    <div class="header-content">
-      <div class="title-section">
-        <h1>Demandes d'opérations</h1>
-        <span class="subtitle">Gérez les opérations de vos clients</span>
-      </div>
-
-      <div class="actions-section">
-        <button class="refresh-btn" (click)="refreshData()">
-          <i class="refresh-icon">🔄</i>
-          Actualiser
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Contenu principal -->
-  <main class="page-content">
-    <!-- Section des filtres -->
-    <section class="filters-section" *ngIf="showFilters">
-      <div class="filters-container">
-        <!-- Filtre par statut -->
-        <div class="filter-group">
-          <label>Statut</label>
-          <select [(ngModel)]="statusFilter" (change)="applyFilters()">
-            <option value="">Tous</option>
-            <option *ngFor="let status of statusOptions" [value]="status">
-              {{ status }}
-            </option>
-          </select>
+      <!-- Section principale -->
+      <div class="main-content-panel">
+        <!-- En-tête avec titre et icône -->
+        <div class="rdv-header">
+          <div class="rdv-header-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+          </div>
+          <div class="rdv-header-content">
+            <h2 class="rdv-title">Opérations quotidiennes</h2>
+            <p class="rdv-subtitle">Gérez les opérations de vos clients</p>
+          </div>
         </div>
 
-        <!-- Filtre par priorité -->
-        <div class="filter-group">
-          <label>Priorité</label>
-          <select [(ngModel)]="priorityFilter" (change)="applyFilters()">
-            <option value="">Toutes</option>
-            <option *ngFor="let priority of priorityOptions" [value]="priority">
-              {{ priority }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Filtre par catégorie -->
-        <div class="filter-group">
-          <label>Catégorie</label>
-          <select [(ngModel)]="categoryFilter" (change)="applyFilters()">
-            <option value="">Toutes</option>
-            <option *ngFor="let category of categoryOptions" [value]="category">
-              {{ category }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Sélection de la période -->
-        <div class="filter-group date-range">
-          <label>Période</label>
-          <div class="date-inputs">
+        <!-- Barre d'actions (recherche, filtres, etc.) -->
+        <div class="rdv-actions">
+          <div class="search-container">
             <input
-              type="date"
-              [(ngModel)]="dateRange.start"
-              (change)="applyFilters()"
+              type="text"
+              class="search-input"
+              placeholder="Rechercher une opération..."
             >
-            <span>à</span>
-            <input
-              type="date"
-              [(ngModel)]="dateRange.end"
-              (change)="applyFilters()"
-            >
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+
+          <div class="filter-container">
+            <select class="filter-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
+              <option value="">Statut: Tous</option>
+              <option *ngFor="let status of statusOptions" [value]="status">
+                Statut: {{ status }}
+              </option>
+            </select>
+          </div>
+
+          <div class="filter-container">
+            <select class="filter-select" [(ngModel)]="priorityFilter" (change)="applyFilters()">
+              <option value="">Priorité: Toutes</option>
+              <option *ngFor="let priority of priorityOptions" [value]="priority">
+                Priorité: {{ priority }}
+              </option>
+            </select>
+          </div>
+
+          <button class="new-rdv-btn" (click)="showFilters = !showFilters">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+            </svg>
+            Filtres avancés
+          </button>
+        </div>
+
+        <!-- Filtres avancés (conditionnellement affichés) -->
+        <div class="advanced-filters" *ngIf="showFilters">
+          <div class="filter-row">
+            <div class="filter-group">
+              <label>Catégorie</label>
+              <select class="filter-select" [(ngModel)]="categoryFilter" (change)="applyFilters()">
+                <option value="">Toutes</option>
+                <option *ngFor="let category of categoryOptions" [value]="category">
+                  {{ category }}
+                </option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Période du</label>
+              <input
+                type="date"
+                [(ngModel)]="dateRange.start"
+                (change)="applyFilters()"
+                class="date-input"
+              >
+            </div>
+
+            <div class="filter-group">
+              <label>au</label>
+              <input
+                type="date"
+                [(ngModel)]="dateRange.end"
+                (change)="applyFilters()"
+                class="date-input"
+              >
+            </div>
+
+            <div class="filter-actions">
+              <button class="btn-secondary" (click)="resetFilters()">
+                Réinitialiser
+              </button>
+              <button class="btn-refresh" (click)="refreshData()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 4v6h-6"></path>
+                  <path d="M1 20v-6h6"></path>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
+                  <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
+                </svg>
+                Actualiser
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tableau des opérations -->
+        <div class="rdv-table-wrapper">
+          <table class="rdv-table">
+            <thead>
+              <tr>
+                <th>Motif</th>
+                <th>Client</th>
+                <th>Téléphone</th>
+                <th>Priorité</th>
+                <th>Catégorie</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let operation of filteredOperations">
+                <td>{{ operation.type }}</td>
+                <td>{{ operation.clientName }}</td>
+                <td>{{ operation.clientNumber }}</td>
+                <td>
+                  <span class="priority-badge" [ngClass]="'priority-' + operation.priority.toLowerCase()">
+                    {{ operation.priority }}
+                  </span>
+                </td>
+                <td>{{ operation.category }}</td>
+                <td>{{ operation.date | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="'status-' + operation.status.toLowerCase().replace(' ', '-')">
+                    {{ operation.status }}
+                  </span>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn edit-btn" title="Modifier" (click)="onEdit(operation)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </button>
+                    <button class="action-btn delete-btn" title="Supprimer" (click)="onDelete(operation)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="rdv-pagination">
+          <div class="pagination-info">
+            Affichage des entrées 1 à {{ filteredOperations.length }} sur {{ originalData.length }}
+          </div>
+          <div class="pagination-controls">
+            <button class="pagination-btn" disabled>&lt;</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">&gt;</button>
           </div>
         </div>
       </div>
-
-      <div class="filters-actions">
-        <button class="reset-btn" (click)="resetFilters()">
-          Réinitialiser les filtres
-        </button>
-      </div>
-    </section>
-
-    <!-- Templates personnalisés pour le tableau -->
-    <ng-template #statusTemplate let-value>
-      <span class="status-badge" [ngClass]="'status-' + value.toLowerCase().replace(' ', '-')">
-        {{ value }}
-      </span>
-    </ng-template>
-
-    <ng-template #priorityTemplate let-value>
-      <span class="priority-badge" [ngClass]="'priority-' + value.toLowerCase().replace(' ', '-')">
-        {{ value }}
-      </span>
-    </ng-template>
-
-    <!-- Tableau des opérations -->
-    <section class="table-section">
-      <shared-table
-        [columns]="columns"
-        [data]="filteredOperations"
-        [options]="tableOptions"
-        (edit)="onEdit($event)"
-        (delete)="onDelete($event)"
-        (rowDblClick)="onRowDoubleClick($event)"
-      ></shared-table>
-    </section>
-  </main>
-</div>
+    </div>
+  </div>
 </div>
 
 <!-- Modal de traitement d'opération -->

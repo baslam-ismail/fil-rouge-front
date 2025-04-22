@@ -1,10 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import {RegisterRequest, User} from "../../core/auth/models/auth.models";
 
+// Interface pour la demande de connexion
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
 
+// Actions de login
 export const login = createAction(
   '[Auth] Login',
-  props<{ email: string; password: string }>()
+  props<{ credentials: LoginRequest }>()
 );
 
 export const loginSuccess = createAction(
@@ -17,31 +22,15 @@ export const loginFailure = createAction(
   props<{ error: string }>()
 );
 
-
-export const loadUser = createAction(
-  '[Auth] Load User',
-  props<{ email: string }>()
-);
-
-export const loadUserSuccess = createAction(
-  '[Auth] Load User Success',
-  props<{ user: User }>()
-);
-
-export const loadUserFailure = createAction(
-  '[Auth] Load User Failure',
-  props<{ error: string }>()
-);
-
-
+// Actions d'enregistrement
 export const register = createAction(
   '[Auth] Register',
-  props<{ user: RegisterRequest }>()
+  props<{ user: any }>()
 );
 
 export const registerSuccess = createAction(
   '[Auth] Register Success',
-  props<{ user: User }>()
+  props<{ user: any }>()
 );
 
 export const registerFailure = createAction(
@@ -49,5 +38,18 @@ export const registerFailure = createAction(
   props<{ error: string }>()
 );
 
-// Logout action
+// Action de déconnexion
 export const logout = createAction('[Auth] Logout');
+
+// Actions pour charger le profil utilisateur
+export const loadUserProfile = createAction('[Auth] Load User Profile');
+
+export const loadUserProfileSuccess = createAction(
+  '[Auth] Load User Profile Success',
+  props<{ user: any }>()
+);
+
+export const loadUserProfileFailure = createAction(
+  '[Auth] Load User Profile Failure',
+  props<{ error: string }>()
+);

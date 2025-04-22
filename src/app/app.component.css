@@ -1,11 +1,23 @@
 .app-container {
-  display: flex;
+  width: 100vw;
+  max-width: 100%;
   min-height: 100vh;
-  background: #1a1a1a;
+  display: flex;
+  overflow-x: hidden;
 }
 
 .main-content {
   flex: 1;
-  margin-left: 250px;
-  padding: 20px;
+  width: calc(100% - 260px);
+  margin-left: 260px;
+  padding: 1.5rem;
+  background: var(--background-main);
+  transition: margin-left var(--transition-normal);
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
 }

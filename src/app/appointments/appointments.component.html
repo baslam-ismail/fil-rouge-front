@@ -1,57 +1,110 @@
 <app-sidebar></app-sidebar>
-<div class="main-content">
-  <app-banner></app-banner>
+<div class="app-container">
+  <div class="main-content">
+    <div class="dashboard-content">
+      <!-- Bannière de statistiques unifiée -->
+      <app-stats-banner [stats]="statsBanner"></app-stats-banner>
 
-  <div class="appointments-container">
-    <h2>Rendez-vous</h2>
+      <!-- Section principale -->
+      <div class="main-content-panel">
+        <!-- En-tête avec titre et icône -->
+        <div class="rdv-header">
+          <div class="rdv-header-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="rdv-header-content">
+            <h2 class="rdv-title">Liste des rendez-vous</h2>
+            <p class="rdv-subtitle">Consultez et gérez les rendez-vous clients</p>
+          </div>
+        </div>
 
-    <!--<button class="create-appointment-btn">Créer rendez-vous</button>-->
+        <!-- Barre d'actions (recherche, filtres, etc.) -->
+        <div class="rdv-actions">
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Rechercher un rendez-vous...">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
 
-    <div class="table-controls">
-      <input type="text" class="search-bar" placeholder="Recherche" />
-      <select class="sort-dropdown">
-        <option>Trier par :</option>
-        <option>Client</option>
-        <option>Date</option>
-        <option>Priorité</option>
-      </select>
-    </div>
-
-    <table class="appointments-table">
-      <thead>
-        <tr>
-          <th>Motif</th>
-          <th>Client</th>
-          <th>Téléphone</th>
-          <th>Priorité</th>
-          <th>Date</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let appointment of paginatedAppointments">
-          <td>{{ appointment.motif }}</td>
-          <td>{{ appointment.clientName }}</td>
-          <td>{{ appointment.clientNumber }}</td>
-          <td>{{ appointment.priority }}</td>
-          <td>{{ appointment.date | date: 'dd/MM/yyyy' }}</td>
-          <td>
-            <select [(ngModel)]="appointment.status" class="status-dropdown">
-              <option>Confirmé</option>
-              <option>En attente</option>
-              <option>Annulé</option>
+          <div class="filter-container">
+            <select class="filter-select">
+              <option>Trier par</option>
+              <option>Date (croissant)</option>
+              <option>Date (décroissant)</option>
+              <option>Priorité</option>
+              <option>Statut</option>
             </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </div>
 
-    <div class="table-pagination">
-      <span>Affichage des données {{ displayStart }} à {{ displayEnd }} sur {{ appointments.length }} entrées</span>
-      <div class="pagination-controls">
-        <button (click)="prevPage()" [disabled]="currentPage === 1">«</button>
-        <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)" [class.active]="currentPage === i + 1">{{ i + 1 }}</button>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">»</button>
+          <button class="new-rdv-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Nouveau rendez-vous
+          </button>
+        </div>
+
+        <!-- Table des rendez-vous -->
+        <div class="rdv-table-wrapper">
+          <table class="rdv-table">
+            <thead>
+              <tr>
+                <th>Motif</th>
+                <th>Client</th>
+                <th>Téléphone</th>
+                <th>Priorité</th>
+                <th>Date</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of paginatedAppointments">
+                <td>{{ appointment.motif }}</td>
+                <td>{{ appointment.clientName }}</td>
+                <td>{{ appointment.clientNumber }}</td>
+                <td>
+                  <span class="priority-badge" [ngClass]="'priority-' + appointment.priority.toLowerCase()">
+                    {{ appointment.priority }}
+                  </span>
+                </td>
+                <td>{{ appointment.date | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                  <select [(ngModel)]="appointment.status" class="status-select"
+                          [ngClass]="'status-' + appointment.status.toLowerCase().replace(' ', '-') || '...'">
+                    <option value="Confirmé">Confirmé</option>
+                    <option value="En attente">En attente</option>
+                    <option value="Annulé">Annulé</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="rdv-pagination">
+          <div class="pagination-info">
+            Affichage des entrées {{ displayStart }} à {{ displayEnd }} sur {{ appointments.length }}
+          </div>
+          <div class="pagination-controls">
+            <button class="pagination-btn" (click)="prevPage()" [disabled]="currentPage === 1">&lt;</button>
+            <button *ngFor="let page of [].constructor(totalPages); let i = index"
+                    (click)="goToPage(i + 1)"
+                    class="pagination-btn"
+                    [class.active]="currentPage === i + 1">
+              {{ i + 1 }}
+            </button>
+            <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">&gt;</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -12,8 +12,8 @@ export interface RegisterRequest {
   name: string;
   email: string;
   password: string;
-  // phone: string;
-  // address?: string;
+  phone: string;  // Ajout du numéro de téléphone comme champ obligatoire
+  address?: string;
   role?: string;
 }
 

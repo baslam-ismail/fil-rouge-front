@@ -12,6 +12,8 @@ import {NotificationToastComponent} from "../shared/components/notification/noti
 import {NotificationService} from "../shared/services/notification.service";
 import { BannerComponent } from '../banner/banner.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
+import { StatsBannerComponent } from '../shared/stats-banner/stats-banner.component';
 
 @Component({
   selector: 'app-service-requests',
@@ -25,7 +27,9 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
     ServiceRequestModalComponent,
     NotificationToastComponent,
     SidebarComponent,
-    BannerComponent
+    BannerComponent,
+    ThemeToggleComponent,
+    StatsBannerComponent
   ]
 })
 export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -35,21 +39,43 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
   private originalData: ServiceRequest[] = [];
   filteredOperations: ServiceRequest[] = [];
 
+  // Données pour la bannière de stats
+  statsBanner = [
+    {
+      icon: 'calendar' as 'calendar',
+      color: 'blue' as 'blue',
+      label: 'Nouvelles demandes',
+      value: 0 // Sera mis à jour lors du chargement des données
+    },
+    {
+      icon: 'clock' as 'clock',
+      color: 'green' as 'green',
+      label: 'En cours de traitement',
+      value: 0 // Sera mis à jour lors du chargement des données
+    },
+    {
+      icon: 'info' as 'info',
+      color: 'orange' as 'orange',
+      label: 'Demandes complétées',
+      value: 0 // Sera mis à jour lors du chargement des données
+    }
+  ];
 
   // Variables pour les filtres
   showFilters = true;
   statusFilter = '';
   priorityFilter = '';
   categoryFilter = '';
+  searchTerm = '';
   dateRange: DateRange = {
     start: '',
     end: ''
   };
 
   // Options de filtres
-  readonly statusOptions = ['Nouveau', 'En cours', 'Traité', 'Annulé'];
-  readonly priorityOptions = ['Haute', 'Moyenne', 'Basse'];
-  readonly categoryOptions = ['Ouverture compte', 'Assurance', 'Prêt'];
+  statusOptions = ['Nouveau', 'En cours', 'Traité', 'Annulé'];
+  priorityOptions = ['Haute', 'Moyenne', 'Basse'];
+  categoryOptions = ['Ouverture compte', 'Assurance', 'Prêt'];
 
 
 
@@ -84,22 +110,29 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit(): void {
     this.loadRequests();
+    this.applyTheme();
   }
 
   ngAfterViewInit(): void {
     this.initializeColumnTemplates();
+  }
+
+  private applyTheme(): void {
+    // Vérifier le thème actuel et l'appliquer
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
     }
-
-
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   private initializeColumnTemplates(): void {
-    // On attend que les templates soient disponibles
     setTimeout(() => {
-      // Mise à jour des colonnes avec les templates
       this.columns = this.columns.map(column => {
         if (column.key === 'status') {
           return { ...column, template: this.statusTemplate };
@@ -117,6 +150,7 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
       next: (requests) => {
         this.originalData = requests;
         this.filteredRequests = [...requests];
+        this.updateStatsBanner();
         this.applyFilters();
       },
       error: (error) => {
@@ -128,15 +162,31 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
     this.subscription.add(requestsSub);
   }
 
+  // Méthode pour mettre à jour les stats de la bannière
+  private updateStatsBanner(): void {
+    this.statsBanner[0].value = this.getStatCount('Nouveau');
+    this.statsBanner[1].value = this.getStatCount('En cours');
+    this.statsBanner[2].value = this.getStatCount('Terminé');
+  }
+
   refreshData(): void {
     this.loadRequests();
     this.resetFilters();
-    // this.notificationService.success('Données actualisées');
   }
 
   applyFilters(): void {
-
     let filtered = [...this.originalData];
+
+    // Filtre par texte de recherche
+    if (this.searchTerm) {
+      const searchLower = this.searchTerm.toLowerCase();
+      filtered = filtered.filter(req =>
+        req.title.toLowerCase().includes(searchLower) ||
+        req.clientName.toLowerCase().includes(searchLower) ||
+        req.clientNumber.toLowerCase().includes(searchLower) ||
+        req.category.toLowerCase().includes(searchLower)
+      );
+    }
 
     if (this.statusFilter && this.statusFilter !== 'Tous') {
       filtered = filtered.filter(req => req.status === this.statusFilter);
@@ -169,13 +219,18 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
     this.statusFilter = '';
     this.priorityFilter = '';
     this.categoryFilter = '';
+    this.searchTerm = '';
     this.dateRange = {
       start: '',
       end: ''
     };
 
     this.filteredRequests = [...this.originalData];
+  }
 
+  // Méthode onSearch pour réagir aux changements dans la barre de recherche
+  onSearch(): void {
+    this.applyFilters();
   }
 
   onEdit(request: ServiceRequest): void {
@@ -199,11 +254,14 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
     }
   }
 
-
-
   onRowDoubleClick(request: ServiceRequest): void {
     console.log('Double-click reçu dans le parent:', request);
     this.selectedRequest = request;
+  }
+
+  // Méthode pour compter les demandes par statut
+  getStatCount(status: string): number {
+    return this.originalData.filter(req => req.status === status).length;
   }
 
   // Dans la classe du composant
@@ -225,6 +283,4 @@ export class ServiceRequestComponent implements OnInit, OnDestroy, AfterViewInit
 
     this.subscription.add(updateSub);
   }
-
-
 }

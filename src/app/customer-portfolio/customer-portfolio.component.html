@@ -1,74 +1,115 @@
 <app-sidebar></app-sidebar>
-<div class="main-content">
-  <app-banner></app-banner>
+<div class="app-container">
+  <div class="main-content">
+    <div class="dashboard-content">
+      <!-- Bannière de statistiques unifiée -->
+      <app-stats-banner [stats]="statsBanner"></app-stats-banner>
 
-  <!-- Conteneur principal -->
-  <div class="customer-portfolio-container">
-    <h2>Portefeuille client</h2>
-
-    <input type="text" class="search-bar" placeholder="Recherche">
-
-    <table class="clients-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Email</th>
-          <th>Téléphone</th>
-          <th>Adresse</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let client of paginatedClients()" (click)="openClientDetails(client)">
-          <td>{{ client.id }}</td>
-          <td>{{ client.lastName }}</td>
-          <td>{{ client.firstName }}</td>
-          <td>{{ client.email }}</td>
-          <td>{{ client.phone }}</td>
-          <td>{{ client.address }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <span>Affichage des données {{ pagination.start }} à {{ pagination.end }} sur {{ clients.length }} entrées</span>
-
-    <!-- Contrôles de pagination -->
-    <div class="pagination-controls">
-      <button (click)="prevPage()" [disabled]="currentPage === 1">«</button>
-      <button *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
-      <button (click)="nextPage()" [disabled]="currentPage === totalPages">»</button>
-    </div>
-
-    <!-- Modale des détails du client -->
-    <div class="modal-overlay" *ngIf="selectedClient">
-      <div class="modal-content">
-        <span class="close-btn" (click)="closeClientDetails()">&times;</span>
-        <h3>Détails du client</h3>
-        <form>
-          <div class="form-group">
-            <label>Nom</label>
-            <input [(ngModel)]="selectedClient.lastName" />
+      <!-- Section principale -->
+      <div class="main-content-panel">
+        <!-- En-tête avec titre et icône -->
+        <div class="rdv-header">
+          <div class="rdv-header-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
           </div>
-          <div class="form-group">
-            <label>Prénom</label>
-            <input [(ngModel)]="selectedClient.firstName" />
+          <div class="rdv-header-content">
+            <h2 class="rdv-title">Portefeuille Clients</h2>
+            <p class="rdv-subtitle">Consultez et gérez vos clients</p>
           </div>
-          <div class="form-group">
-            <label>Numéro de téléphone</label>
-            <input [(ngModel)]="selectedClient.phone" />
+        </div>
+
+        <!-- Barre d'actions (recherche, filtres, etc.) -->
+        <div class="rdv-actions">
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Rechercher un client...">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
           </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input [(ngModel)]="selectedClient.email" />
+
+          <div class="filter-container">
+            <select class="filter-select">
+              <option>Trier par</option>
+              <option>Nom (A-Z)</option>
+              <option>Date d'ouverture</option>
+              <option>Solde (décroissant)</option>
+              <option>Statut</option>
+            </select>
           </div>
-          <div class="form-group">
-            <label>Adresse postale</label>
-            <input [(ngModel)]="selectedClient.address" />
+
+          <button class="new-rdv-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Nouveau client
+          </button>
+        </div>
+
+        <!-- Table des clients -->
+        <div class="rdv-table-wrapper">
+          <table class="rdv-table">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Type de compte</th>
+                <th>Solde</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients">
+                <td>{{ client.name }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.accountType }}</td>
+                <td>{{ client.balance | currency:'EUR' }}</td>
+                <td>
+                  <span class="priority-badge" [ngClass]="'status-' + client.status.toLowerCase()">
+                    {{ client.status }}
+                  </span>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn view-btn" title="Voir le détail">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                    <button class="action-btn edit-btn" title="Modifier">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="rdv-pagination">
+          <div class="pagination-info">
+            Affichage des entrées 1 à {{ clients.length }} sur {{ clients.length }}
           </div>
-          <button type="button" (click)="updateClient()">Mettre à jour</button>
-          <button type="button" class="delete-btn" (click)="deleteClient()">Supprimer</button>
-        </form>
+          <div class="pagination-controls">
+            <button class="pagination-btn" disabled>&lt;</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">&gt;</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

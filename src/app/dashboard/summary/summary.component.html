@@ -1,87 +1,133 @@
-  <div class="dashboard-grid">
+<div class="dashboard-grid">
+  <!-- Calendrier agrandi à gauche -->
+  <div class="card-container calendar-container">
     <app-calendar></app-calendar>
-    <div class="box">
-      
-      <!-- Demandes de service -->
-      <h3> <a routerLink="/service-requests" routerLinkActive="active"> Demandes de services</a> </h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Libellé demande</th>
-            <th>Nom client</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ouverture compte</td>
-            <td>Alain FRENAULT</td>
-          </tr>
-          <tr>
-            <td>Assurance vie</td>
-            <td>Sofia ARLOUCHE</td>
-          </tr>
-          <tr>
-            <td>Demande prêt</td>
-            <td>Mamadou TOURE</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Portefeuille client -->
-    <div class="box">
-      <h3><a routerLink="/customer-portfolio" routerLinkActive="active">Portefeuille client</a></h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Numéro de compte</th>
-            <th>Nom client</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>N°19543</td>
-            <td>Alain FRENAULT</td>
-          </tr>
-          <tr>
-            <td>N°19542</td>
-            <td>Sofia ARLOUCHE</td>
-          </tr>
-          <tr>
-            <td>N°19541</td>
-            <td>Mamadou TOURE</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Opérations quotidiennes -->
-    <div class="box">
-      <h3><a routerLink="/daily-operation" routerLinkActive="active">Opérations quotidiennes</a></h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Opération réalisée</th>
-            <th>Nom client</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Virement</td>
-            <td>Alain FRENAULT</td>
-          </tr>
-          <tr>
-            <td>Prélèvement</td>
-            <td>Sofia ARLOUCHE</td>
-          </tr>
-          <tr>
-            <td>Carte bancaire</td>
-            <td>Mamadou TOURE</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
   </div>
 
+  <!-- Demandes de services en haut à droite -->
+  <div class="card-container service-request-container">
+    <div class="service-card">
+      <div class="card-header">
+        <h4>
+          <div class="header-indicator"></div>
+          Demandes de services
+        </h4>
+        <a href="#" class="view-all">Voir tout</a>
+      </div>
+      <div class="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th>LIBELLÉ</th>
+              <th>CLIENT</th>
+              <th>DATE</th>
+              <th>STATUT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ouverture compte</td>
+              <td>Alain FRENAULT</td>
+              <td>12/04/2025</td>
+              <td><span class="status-pending">En attente</span></td>
+            </tr>
+            <tr>
+              <td>Assurance vie</td>
+              <td>Sofia ARLOUCHE</td>
+              <td>15/04/2025</td>
+              <td><span class="status-processing">En cours</span></td>
+            </tr>
+            <tr>
+              <td>Demande prêt</td>
+              <td>Mamadou TOURE</td>
+              <td>18/04/2025</td>
+              <td><span class="status-completed">Complété</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
+  <!-- Portefeuille client en bas à gauche -->
+  <div class="card-container portfolio-container">
+    <div class="service-card">
+      <div class="card-header">
+        <h4>
+          <div class="header-indicator"></div>
+          Portefeuille client
+        </h4>
+        <a href="#" class="view-all">Voir tout</a>
+      </div>
+      <div class="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>CLIENT</th>
+              <th>STATUT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>19543</td>
+              <td>Alain FRENAULT</td>
+              <td><span class="status-completed">Actif</span></td>
+            </tr>
+            <tr>
+              <td>19542</td>
+              <td>Sofia ARLOUCHE</td>
+              <td><span class="status-completed">Actif</span></td>
+            </tr>
+            <tr>
+              <td>19541</td>
+              <td>Mamadou TOURE</td>
+              <td><span class="status-processing">En attente</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opérations quotidiennes en bas à droite -->
+  <div class="card-container operations-container">
+    <div class="service-card">
+      <div class="card-header">
+        <h4>
+          <div class="header-indicator"></div>
+          Opérations quotidiennes
+        </h4>
+        <a href="#" class="view-all">Voir tout</a>
+      </div>
+      <div class="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th>OPÉRATION</th>
+              <th>CLIENT</th>
+              <th>MONTANT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Virement</td>
+              <td>Alain FRENAULT</td>
+              <td>2 500 €</td>
+            </tr>
+            <tr>
+              <td>Prélèvement</td>
+              <td>Sofia ARLOUCHE</td>
+              <td>750 €</td>
+            </tr>
+            <tr>
+              <td>Carte bancaire</td>
+              <td>Mamadou TOURE</td>
+              <td>1 200 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="stats-banner">
+  <div class="stat-card" *ngFor="let stat of stats">
+    <div class="card-icon" [ngClass]="['icon-' + stat.icon, stat.color]">
+      <span [innerHTML]="getIconSvg(stat.icon)" class="icon-svg"></span>
+    </div>
+    <div class="card-content">
+      <div class="card-label">{{ stat.label }}</div>
+      <div class="card-value">{{ stat.value }}</div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateAdvisorComponent } from './create-advisor/create-advisor.component';
 import { ListAdvisorsComponent } from './list-advisors/list-advisors.component';
 import { ClientManagementComponent } from './client-management/client-management.component';
+import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
 import { OperationsFormComponent } from './dashboard-customer/operations-form/operations-form.component';
 import { RequestsFormComponent } from './dashboard-customer/requests-form/requests-form.component';
@@ -24,11 +25,12 @@ import { RegisterComponent } from "./register/register.component";
 
 
 export const routes: Routes = [
-    { path: '', component: DashboardComponent},
+    { path: '', component: LoginComponent},
     { path: 'dashboard', component: DashboardComponent},
     { path: 'calendar-widget', component: CalendarWidgetComponent},
     { path: 'calendar', component: CalendarComponent},
     { path: 'appointments-form', component: AppointmentsFormComponent},
+    { path: 'creation-compte', component: CreationCompteComponent},
     { path: 'create-account', component: CreateAccountComponent},
     { path: 'customer-portfolio', component: CustomerPortfolioComponent},
     { path: 'appointments', component: AppointmentsComponent},
@@ -36,7 +38,6 @@ export const routes: Routes = [
     { path: 'profil', component: ProfilComponent},
     { path: 'dashboard', component: DashboardComponent },
     { path: 'dashboard-customer', component: DashboardCustomerComponent },
-    { path: 'create-account', component: CreateAccountComponent },
     { path: 'chatbot', component: ChatbotComponent},
     { path: 'service-requests', component: ServiceRequestComponent },
     { path: 'customer-portfolio', component: CustomerPortfolioComponent },
@@ -54,8 +55,8 @@ export const routes: Routes = [
     { path: 'list-advisors', component: ListAdvisorsComponent},
     { path: 'client-management', component:ClientManagementComponent},
     {path : 'forgot-password', component: ForgotPasswordComponent}
-
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
